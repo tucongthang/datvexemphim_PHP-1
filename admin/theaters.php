@@ -98,7 +98,7 @@
                                                     <div class="col-12">
                                                         <div class="form-group">
                                                             <label>Theater Phone</label>
-                                                            <input class="form-control" name="edit-theater-phone" id="edit-theater-phone"
+                                                            <input type="text" pattern="^(0|\+84)[0-9]{9,10}$" class="form-control" name="edit-theater-phone" id="edit-theater-phone"
                                                                    placeholder="Enter Theater Phone" value="<?php echo $row['theater_phone']; ?>">
                                                         </div>
                                                     </div>
@@ -184,7 +184,7 @@
                         <div class="col-12">
                             <div class="form-group">
                                 <label>Theater Phone</label>
-                                <input class="form-control" name="theater-phone" id="add_theater_phone"
+                                <input type="text" pattern="^(0|\+84)[0-9]{9,10}$" class="form-control" name="theater-phone" id="add_theater_phone"
                                        placeholder="Enter Theater Phone" value="<?php if(isset($_POST['theater-phone'])) echo $_POST['theater-phone']; ?>">
                             </div>
                         </div>

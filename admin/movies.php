@@ -33,7 +33,7 @@
             </div>
 
             <?php
-                include_once('templates/error.php');
+            include_once('templates/error.php');
             ?>
 
             <div class="table-responsive">
@@ -82,7 +82,8 @@
                                 <td><img src="../uploads/<?php echo $row['image']; ?>" alt="" class="resize"></td>
                                 <td><?php echo ($row['status'] == 1) ? "Active" : "Inactive" ?></td>
                                 <td><?php echo ($row['running'] == 1) ? "Running" : "Upcomming" ?></td>
-<!--                                <td><img src="../../uploads/--><?php //echo $row['image']; ?><!--" alt="" class="resize"></td>-->
+                                <!--                                <td><img src="../../uploads/-->
+                                <?php //echo $row['image']; ?><!--" alt="" class="resize"></td>-->
                                 <td>
                                     <button data-toggle="modal" type="button"
                                             data-target="#edit_movie_modal<?php echo $id; ?>"
@@ -135,7 +136,8 @@
                                                     <div class="col-12">
                                                         <div class="form-group">
                                                             <label>Release Date</label>
-                                                            <input type="date" class="form-control" name="edit-movie-release-date"
+                                                            <input type="date" class="form-control"
+                                                                   name="edit-movie-release-date"
                                                                    id="edit-movie-release-date"
                                                                    value="<?php echo $row['release_date']; ?>">
                                                         </div>
@@ -143,7 +145,8 @@
                                                     <div class="col-12">
                                                         <div class="form-group">
                                                             <label>Genre</label>
-                                                            <select class="form-control" name="edit-movie-genre-id" id="edit-movie-genre-id">
+                                                            <select class="form-control" name="edit-movie-genre-id"
+                                                                    id="edit-movie-genre-id">
                                                                 <?php
                                                                 $queryGenre = "SELECT id, genre_name FROM genre";
                                                                 $resultGenre = $conn->query($queryGenre);
@@ -157,7 +160,8 @@
                                                     <div class="col-12">
                                                         <div class="form-group">
                                                             <label>Language</label>
-                                                            <input type="text" name="edit-movie-language" id="edit-movie-language"
+                                                            <input type="text" name="edit-movie-language"
+                                                                   id="edit-movie-language"
                                                                    class="form-control"
                                                                    value="<?php echo $row['language']; ?>">
                                                         </div>
@@ -165,7 +169,8 @@
                                                     <div class="col-12">
                                                         <div class="form-group">
                                                             <label>Trailer Link</label>
-                                                            <input type="text" name="edit-movie-trailer-link" id="edit-movie-trailer-link"
+                                                            <input type="text" name="edit-movie-trailer-link"
+                                                                   id="edit-movie-trailer-link"
                                                                    class="form-control"
                                                                    value="<?php echo $row['trailer_link']; ?>">
                                                         </div>
@@ -173,25 +178,28 @@
                                                     <div class="col-12">
                                                         <div class="form-group">
                                                             <label>Description</label>
-                                                            <textarea type="text" name="edit-movie-description" id="edit-movie-description"
+                                                            <textarea type="text" name="edit-movie-description"
+                                                                      id="edit-movie-description"
                                                                       class="form-control"><?php echo $row['description']; ?></textarea>
                                                         </div>
                                                     </div>
                                                     <div class="col-12">
                                                         <div class="form-group">
                                                             <label>Status</label>
-                                                            <select class="form-control" name="edit-movie-status" id="edit-movie-status">
-                                                                <option value="1">Active</option>
-                                                                <option value="0">Inactive</option>
+                                                            <select class="form-control" name="edit-movie-status"
+                                                                    id="edit-movie-status">
+                                                                <option value="1" <?php echo ($row['status'] == 1) ? "selected" : "" ?>>Active</option>
+                                                                <option value="0" <?php echo ($row['status'] == 0) ? "selected" : "" ?>>Inactive</option>
                                                             </select>
                                                         </div>
                                                     </div>
                                                     <div class="col-12">
                                                         <div class="form-group">
                                                             <label>Running</label>
-                                                            <select class="form-control" name="edit-movie-running" id="edit-movie-running">
-                                                                <option value="1">Running</option>
-                                                                <option value="0">Upcoming</option>
+                                                            <select class="form-control" name="edit-movie-running"
+                                                                    id="edit-movie-running">
+                                                                <option value="1" <?php echo ($row['running'] == 1) ? "selected" : "" ?>>Running</option>
+                                                                <option value="0" <?php echo ($row['running'] == 0) ? "selected" : "" ?>>Upcoming</option>
                                                             </select>
                                                         </div>
                                                     </div>
@@ -199,15 +207,18 @@
                                                         <div class="form-group">
                                                             <label>Images</label>
                                                             <br>
-                                                            <img src="../../uploads/<?php echo $row['image']; ?>" width="10%">
-                                                            <input type="file" name="edit-movie-image" id="edit-movie-image"
+                                                            <img src="../../uploads/<?php echo $row['image']; ?>"
+                                                                 width="10%">
+                                                            <input type="file" name="edit-movie-image"
+                                                                   id="edit-movie-image"
                                                                    class="form-control">
                                                             <input type="hidden" name="old_image"
                                                                    value="<?php echo $row['image']; ?>" id="old_image"
                                                                    class="form-control">
                                                         </div>
                                                     </div>
-                                                    <input type="hidden" name="edit-movie-id" value="<?php echo $row['id']; ?>">
+                                                    <input type="hidden" name="edit-movie-id"
+                                                           value="<?php echo $row['id']; ?>">
                                                     <div class="col-12">
 
                                                         <input type="submit" name="edit-movie-btn" id="edit-movie-btn"
@@ -239,8 +250,10 @@
                                         <div class="modal-body">
                                             <form id="insert_movie" action="exec/movies.php" method="post">
                                                 <h4> Yor Sour This id "<?php echo $row['id']; ?>" is delete.</h4>
-                                                <input type="hidden" name="delete-movie-id" value="<?php echo $row['id']; ?>">
-                                                <input type="submit" name="delete-movie-btn" id="delete-movie-btn" value="OK"
+                                                <input type="hidden" name="delete-movie-id"
+                                                       value="<?php echo $row['id']; ?>">
+                                                <input type="submit" name="delete-movie-btn" id="delete-movie-btn"
+                                                       value="OK"
                                                        class="btn btn-primary">
                                             </form>
                                         </div>
@@ -325,7 +338,8 @@
                             <div class="col-12">
                                 <div class="form-group">
                                     <label>Trailer Link</label>
-                                    <input type="text" name="movie-trailer-link" id="movie-trailer-link" class="form-control"
+                                    <input type="text" name="movie-trailer-link" id="movie-trailer-link"
+                                           class="form-control"
                                            placeholder="Enter Trailer">
                                 </div>
                             </div>
@@ -349,7 +363,7 @@
                                 <div class="form-group">
                                     <label>Running</label>
                                     <select class="form-control" name="movie-running" id="movie-running">
-                                         <option value="0">Running</option>
+                                        <option value="0">Running</option>
                                         <option value="1">Upcoming</option>
                                     </select>
                                 </div>
@@ -357,7 +371,8 @@
                             <div class="col-12">
                                 <div class="form-group">
                                     <label>Upload Image</label>
-                                    <input type="file" name="movie-image" id="movie-image" value="img" class="form-control">
+                                    <input type="file" name="movie-image" id="movie-image" value="img"
+                                           class="form-control">
                                 </div>
                             </div>
                             <div class="col-12">

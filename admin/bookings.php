@@ -144,7 +144,7 @@
                 </div>
                 <div class="modal-body">
                     <form name="myform" id="insert_movie" action="exec/bookings.php" method="post"
-                          enctype="multipart/form-data" onsubmit="return validateform()">
+                          enctype="multipart/form-data">
                         <div class="row">
 
                             <div class="col-12">

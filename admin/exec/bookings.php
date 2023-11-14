@@ -16,32 +16,42 @@ if (isset($_POST['add-booking-btn'])) {
         (`user_id`, `seats`, `total_seats`, `booking_date`, `showtime_id`, `total_price`) 
         VALUES ('$user_id', '$seats', '$total_seats', '$booking_date', '$showtime_id', '$total_price')");
 
-        $_SESSION['msg'] = "Insert successful";
-        $_SESSION['error'] = 0;
-
+        if ($insert_record) {
+            $msg = "Insert successful";
+            $error = 0;
+        } else {
+            throw new Exception("Insert unsuccessful");
+        }
     } catch (Exception $e) {
-        // Handle the exception, log the error, display an error message, etc.
-        $_SESSION['msg'] = "An error occurred: " . $e->getMessage();
-        $_SESSION['error'] = 1;
+        $msg = "An error occurred: " . $e->getMessage();
+        $error = 1;
     }
 
-    header("Location: ../bookings.php");
+        header("Location: ../bookings.php?msg=" . urlencode($msg) . "&error=" . $error);
+
     exit();
 }
 
 if (isset($_POST['delete-booking-btn'])) {
     $id = mysqli_real_escape_string($conn, $_POST['id']);
 
-    $delete_record = mysqli_query($conn, "DELETE FROM booking WHERE id=$id");
+    try {
 
-    if (!$delete_record) {
-        $msg = "Delete unsuccessful";
+        $delete_record = mysqli_query($conn, "DELETE FROM booking WHERE id=$id");
+
+
+        if ($delete_record) {
+            $msg = "Delete successful";
+            $error = 0;
+        } else {
+            throw new Exception("Delete unsuccessful");
+        }
+    } catch (Exception $e) {
+        $msg = "An error occurred: " . $e->getMessage();
         $error = 1;
-    } else {
-        $msg = "Delete successful";
-        $error = 0;
     }
 
-    header("Location: ../bookings.php");
+        header("Location: ../bookings.php?msg=" . urlencode($msg) . "&error=" . $error);
+
     exit();
 }
