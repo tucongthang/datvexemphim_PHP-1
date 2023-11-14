@@ -51,7 +51,7 @@
                                 }
                                 ?>
                                 <span>Hii <?php echo $_SESSION['username']; ?></span>
-                                <a href="../logout.php"> Logout</a>
+                                <a href="logout.php"> Logout</a>
                             </div>
 
                         </div>

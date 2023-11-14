@@ -16,9 +16,10 @@ if (isset($_POST['add-screen-btn'])) {
     } else {
         $msg = "Insert successful";
         $error = 0;
-        header("Location: ../screens.php");
-        exit();
     }
+
+    header("Location: ../screens.php");
+    exit();
 }
 
 if (isset($_POST['update-screen-btn'])) {
@@ -34,9 +35,10 @@ if (isset($_POST['update-screen-btn'])) {
     } else {
         $msg = "Update successful";
         $error = 0;
-        header("Location: ../screens.php");
-        exit();
     }
+
+    header("Location: ../screens.php");
+    exit();
 }
 
 if (isset($_POST['delete-screen-btn'])) {
@@ -50,7 +52,8 @@ if (isset($_POST['delete-screen-btn'])) {
     } else {
         $msg = "Delete successful";
         $error = 0;
-        header("Location: ../screens.php");
-        exit();
     }
+
+    header("Location: ../screens.php");
+    exit();
 }

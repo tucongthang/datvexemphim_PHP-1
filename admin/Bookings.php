@@ -138,29 +138,21 @@
                             </div>
                             <div class="col-12">
                                 <div class="form-group">
-                                    <label>Movie</label>
-
-                                    <select class="form-control category_list" name="movie">
-                                        <option>Select Username</option>
+                                    <label>Showtime ID</label>
+                                    <select class="form-control category_list" name="showtime-id" id="showtime-select">
+                                        <option>Select Showtime ID</option>
                                         <?php
-                                        $result = mysqli_query($conn, "SELECT * FROM movies");
-                                        if (mysqli_num_rows($result) > 0) {
-                                            while ($row = mysqli_fetch_array($result)) {
-                                                if ($row['running'] == "1") {
-                                                    ?>
-                                                    <option value="<?php echo $row['id']; ?>"><?php echo $row['title']; ?></option>
-                                                    <?php
-                                                }
+                                        $resultShowtimes = mysqli_query($conn, "SELECT id FROM showtimes");
+
+                                        if (mysqli_num_rows($resultShowtimes) > 0) {
+                                            while ($rowShowtimes = mysqli_fetch_array($resultShowtimes)) {
+                                                ?>
+                                                <option value="<?php echo $rowShowtimes['id']; ?>"><?php echo $rowShowtimes['id']; ?></option>
+                                                <?php
                                             }
                                         }
                                         ?>
                                     </select>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <label>Show Time</label>
-                                    <input type="text" name="show_time" class="form-control" placeholder="Enter Show">
                                 </div>
                             </div>
                             <div class="col-12">
@@ -172,14 +164,14 @@
                             <div class="col-12">
                                 <div class="form-group">
                                     <label>Total Seat</label>
-                                    <input type="number" name="totalseat" class="form-control"
+                                    <input type="number" name="total-seat" class="form-control" id="total-seat"
                                            placeholder="Enter Total Seat">
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="form-group">
                                     <label>Price</label>
-                                    <input type="text" name="price" class="form-control" placeholder="Enter Price">
+                                    <input type="text" id="price" name="price" class="form-control" placeholder="Enter Price">
                                 </div>
                             </div>
                             <div class="col-12">
@@ -194,10 +186,9 @@
             </div>
         </div>
     </div>
-    <!-- Add custemers- Modal end -->
+
+    <script src="./js/bookings.js"></script>
+
     <?php include_once("./templates/footer.php"); ?>
 
 
-    <script>
-
-    </script>
