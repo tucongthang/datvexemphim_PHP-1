@@ -24,6 +24,7 @@
         $username = mysqli_real_escape_string($conn, $_POST['username']);
         $password = mysqli_real_escape_string($conn, $_POST['password']);
 
+        // Lấy hash từ database dựa vào tên người dùng
         $query = "SELECT id, username, password FROM users WHERE username = '$username'";
         $result = mysqli_query($conn, $query);
 
@@ -62,7 +63,7 @@
                         <form id="loginForm" action="" method="POST">
                             <table style="background-color:white;" class="table-condensed">
                                 <tr>
-                                    <a href="./index.html"><img src="assets/images/logo.png" alt="" width="180px"></a>
+                                    <a href="./index.html"><img src="assets/img/logo.png" alt="" width="180px"></a>
                                 </tr>
                                 <tr>
                                     <td>
