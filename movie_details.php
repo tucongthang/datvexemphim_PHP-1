@@ -39,8 +39,59 @@ $row = mysqli_fetch_array($result);
             margin-top: -1rem;
         }
 
-        .card-body:hover .details-button {
+        .image-container {
+            overflow: hidden;
+            position: relative;
+        }
+
+        .detail{
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .detail-button {
+            text-align: center;
+            display: none;
+        }
+
+        .image-container:hover .detail {
+            opacity: 1;
+        }
+
+        .image-container:hover .detail-button {
             display: block;
+        }
+
+        .detail-buttons a {
+            color: #fff;
+            padding: 10px 20px;
+            margin-right: 10px;
+            text-decoration: none;
+            border: 1px solid #fff;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .detail-buttons a:hover {
+            background-color: #fff;
+            color: #000;
+        }
+
+        .image-container h6 {
+            text-align: right;
+        }
+
+        .detail-button {
+            width: 150px;
         }
 
     </style>
@@ -118,35 +169,44 @@ $id = $row['id'];
                 </div>
             </div>
             <div class="col-lg-3">
-            <div class="h4 pb-2 mb-4 text-black border-bottom border-danger">
-    Phim đang chiếu
-</div>
-<div class="row">
-    <?php
-    // Query to retrieve currently running movies
-    $currentMoviesQuery = "SELECT id, title, image FROM movies WHERE running = 1";
-    $currentMoviesResult = mysqli_query($conn, $currentMoviesQuery);
+                <div class="h4 pb-2 mb-4 text-black border-bottom border-danger">
+                    Phim đang chiếu
+                </div>
+                <div class="row">
+                    <?php
+                    $currentMoviesQuery = "SELECT id, title, image FROM movies WHERE running = 1";
+                    $currentMoviesResult = mysqli_query($conn, $currentMoviesQuery);
 
-    if (mysqli_num_rows($currentMoviesResult) > 0) {
-        while ($currentMovie = mysqli_fetch_assoc($currentMoviesResult)) {
-            ?>
-            <div class="col-md-12 mb-3">
-                <div class="card-body text-center position-relative">
-                    <img src="uploads/<?php echo $currentMovie['image']; ?>" class="img-fluid mb-2" alt="Movie Image" data-toggle="hover" data-target=".details-button-<?php echo $currentMovie['id']; ?>">
-                    <h5 class="card-title"><?php echo $currentMovie['title']; ?></h5>
-                    <a class="btn btn-primary details-button-<?php echo $currentMovie['id']; ?> d-none" href="movie_details.php?pass=<?php echo $currentMovie['id']; ?>">
-                        Xem chi tiết
-                    </a>
+                    if (mysqli_num_rows($currentMoviesResult) > 0) {
+                        while ($currentMovie = mysqli_fetch_assoc($currentMoviesResult)) {
+                            ?>
+                            <div class="col-md-12 mb-3">
+                                <div class="image-container">
+                                    <div class="text-center position-relative">
+                                        <img src="uploads/<?php echo $currentMovie['image']; ?>" class="img-fluid mb-4" alt="Movie Image">
+                                        <h5 class="card-title"><?php echo $currentMovie['title']; ?></h5>
+                                        <div class="detail">
+                                            <div class="detail-button">
+                                                <div class="col">
+                                                    <div class="row">
+                                                        <a class="btn btn-primary" href="movie_details.php?pass=<?php echo $currentMovie['id']; ?>">
+                                                            Xem chi tiết
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php
+                        }
+                    } else {
+                        echo "No currently running movies.";
+                    }
+                    ?>
                 </div>
             </div>
-            <?php
-        }
-    } else {
-        echo "No currently running movies.";
-    }
-    ?>
-</div>
-                </div>
         </div>
 
         <div class="row">
