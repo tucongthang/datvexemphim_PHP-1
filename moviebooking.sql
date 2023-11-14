@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1:3306
--- Thời gian đã tạo: Th10 14, 2023 lúc 04:23 AM
+-- Thời gian đã tạo: Th10 14, 2023 lúc 02:53 PM
 -- Phiên bản máy phục vụ: 10.4.24-MariaDB
 -- Phiên bản PHP: 8.1.6
 
@@ -140,8 +140,10 @@ INSERT INTO `movies` (`id`, `title`, `director`, `release_date`, `genre_id`, `la
 (13, 'Chaal Jeevi Laiye', 'Vipul Mehta', '2019-01-07', 3, 'Gujarati', 'https://www.youtube.com/embed/y1NoFZPVTr0', '                Chaal Jeevi Laiye is a story of a Father-Son’s unplanned journey to escape a workaholic existence. The duo, Aditya Parikh and his father Bipin Chandra Parikh explore the meaning of life as they meet a stranger traveler named Ketki, who takes them on a journey of surprises and realiza', 'chaal-jivi-laiye.jpg', 1, 1),
 (14, 'Tanaji', 'Om Raut', '2020-01-10', 4, 'Hindi', 'https://www.youtube.com/embed/cffAGIYTEHU', '                Gulshan Kumar, T-Series & Ajay Devgn ffilms Presents official trailer of the most awaited bollywood movie TANHAJI -THE UNSUNG WARRIOR in 3D, Directed by Om Raut, will release on 10th January 2020.\r\nTanhaji- The Unsung Warrior is an Indian biographical period drama film based on the l', 'tanaji.jpeg', 1, 1),
 (15, 'Playing With Fire ', 'Andrea Sedlackova', '2019-11-06', 5, 'English', 'https://www.youtube.com/embed/fd5GlZUpfaM', '                Playing with Fire is a 2019 American family comedy film directed by Andy Fickman from a screenplay by Dan Ewen and Matt Lieberman based on a story by Ewen. The film stars John Cena, Keegan-Michael Key, John Leguizamo, Dennis Haysbert, Brianna Hildebrand and Judy Greer, and follows a ', 'movieposter_en.jpg', 1, 1),
-(16, 'Golmaal Again', 'Rohit Shetty', '2017-10-20', 6, 'Hindi', 'https://www.youtube.com/embed/VgQUwsUHdqc', 'Five orphan men return to the orphanage they grew up in to attend their mentor\'s funeral. However, they encounter the ghost of their childhood friend, Khushi, and help her attain salvation.', 'golmaal_again.jpg', 1, 0),
-(17, 'Shreshaah', 'Vishnuvardhan', '2021-08-21', 7, 'Hindi', 'https://www.youtube.com/embed/Q0FTXnefVBA', 'The life of Indian army captain Vikram Batra, awarded with the Param Vir Chakra, India\'s highest award for valour for his actions during the 1999 Kargil War.', 'shershah.jpg', 1, 0);
+(16, 'Golmaal Again', 'Rohit Shetty', '2017-10-20', 6, 'Hindi', 'https://www.youtube.com/embed/VgQUwsUHdqc', 'Five orphan men return to the orphanage they grew up in to attend their mentor\'s funeral. However, they encounter the ghost of their childhood friend, Khushi, and help her attain salvation.', 'golmaal_again.jpg', 1, 1),
+(17, 'Shreshaah', 'Vishnuvardhan', '2021-08-21', 7, 'Hindi', 'https://www.youtube.com/embed/Q0FTXnefVBA', 'The life of Indian army captain Vikram Batra, awarded with the Param Vir Chakra, India\'s highest award for valour for his actions during the 1999 Kargil War.', 'shershah.jpg', 1, 1),
+(21, 'Test', 'Test', '2023-11-15', 1, 'Test', 'https://www.youtube.com/watch?v=BadhSr17g-E', 'gest', '118914956_1313702765640982_9209319587640248673_n.jpg', 1, 1),
+(22, 'Test', 'Test', '2023-11-16', 1, 'Test', 'https://www.youtube.com/watch?v=BadhSr17g-E', 'Test', '118914956_1313702765640982_9209319587640248673_n.jpg', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -151,7 +153,7 @@ INSERT INTO `movies` (`id`, `title`, `director`, `release_date`, `genre_id`, `la
 
 CREATE TABLE `screens` (
   `id` int(11) NOT NULL,
-  `threater_id` int(11) DEFAULT 0,
+  `theater_id` int(11) DEFAULT 0,
   `screen_number` int(11) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
@@ -159,8 +161,11 @@ CREATE TABLE `screens` (
 -- Đang đổ dữ liệu cho bảng `screens`
 --
 
-INSERT INTO `screens` (`id`, `threater_id`, `screen_number`) VALUES
-(1, 1, 1);
+INSERT INTO `screens` (`id`, `theater_id`, `screen_number`) VALUES
+(1, 1, 1),
+(2, 1, 2),
+(7, 1, 3),
+(6, 1, 4);
 
 -- --------------------------------------------------------
 
@@ -182,10 +187,8 @@ CREATE TABLE `showtimes` (
 --
 
 INSERT INTO `showtimes` (`id`, `movie_id`, `theater_id`, `screen_id`, `showtime`, `price`) VALUES
-(1, 9, 1, 1, '2023-11-10 19:46:00', '0.00'),
-(2, 9, 1, 1, '2023-11-18 21:19:15', '0.00'),
-(3, 9, 1, 1, '2023-11-11 21:19:29', '0.00'),
-(4, 9, 1, 1, '2023-11-14 21:19:41', '0.00');
+(1, 9, 1, 1, '2023-11-15 15:36:00', '10.00'),
+(3, 9, 1, 1, '2023-11-10 17:21:00', '0.00');
 
 -- --------------------------------------------------------
 
@@ -205,7 +208,12 @@ CREATE TABLE `theaters` (
 --
 
 INSERT INTO `theaters` (`id`, `theater_name`, `theater_address`, `theater_phone`) VALUES
-(1, 'AZIR 2D', 'Nha Trang', '0123456789');
+(1, 'AZIR 2D', 'Nha Trang', '0123456789'),
+(2, 'AZID 3D', 'Test sdas', '0928282828'),
+(4, 'AZID 4D', 'Test', '0928282828'),
+(11, 'AZIR 8D', 'test', '10248129840'),
+(12, 'AZIR 9D', 'test', '10248129840'),
+(13, 'AZIR 9D', 'test', '10248129840');
 
 -- --------------------------------------------------------
 
@@ -274,7 +282,8 @@ ALTER TABLE `movies`
 -- Chỉ mục cho bảng `screens`
 --
 ALTER TABLE `screens`
-  ADD PRIMARY KEY (`id`) USING BTREE;
+  ADD PRIMARY KEY (`id`) USING BTREE,
+  ADD UNIQUE KEY `theater_screen_id` (`theater_id`,`screen_number`);
 
 --
 -- Chỉ mục cho bảng `showtimes`
@@ -329,19 +338,25 @@ ALTER TABLE `genre`
 -- AUTO_INCREMENT cho bảng `movies`
 --
 ALTER TABLE `movies`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT cho bảng `screens`
 --
 ALTER TABLE `screens`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT cho bảng `showtimes`
+--
+ALTER TABLE `showtimes`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT cho bảng `theaters`
 --
 ALTER TABLE `theaters`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT cho bảng `users`
@@ -365,6 +380,12 @@ ALTER TABLE `booking`
 --
 ALTER TABLE `movies`
   ADD CONSTRAINT `movies_ibfk_1` FOREIGN KEY (`genre_id`) REFERENCES `genre` (`id`);
+
+--
+-- Các ràng buộc cho bảng `screens`
+--
+ALTER TABLE `screens`
+  ADD CONSTRAINT `screens_ibfk_1` FOREIGN KEY (`theater_id`) REFERENCES `theaters` (`id`);
 
 --
 -- Các ràng buộc cho bảng `showtimes`
