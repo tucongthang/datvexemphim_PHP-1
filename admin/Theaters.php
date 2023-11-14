@@ -15,6 +15,7 @@
     ?>
     <?php include_once("./templates/top.php"); ?>
     <?php include_once("./templates/navbar.php"); ?>
+
     <div class="container-fluid">
         <div class="row">
 
@@ -22,12 +23,15 @@
 
             <div class="row">
                 <div class="col-10">
-                    <h2>Feedback</h2>
+                    <h2>Theaters</h2>
                 </div>
                 <div class="col-2">
                     <button type="button" data-toggle="modal" data-target="#add_theater" class="btn btn-primary btn-sm">Add Theater</button>
                 </div>
 
+                <?php
+                    include_once("templates/error.php");
+                ?>
 
             </div>
 
@@ -75,37 +79,36 @@
                                             </button>
                                         </div>
                                         <div class="modal-body">
-                                            <form id="insert_movie" action="insert_data.php" method="post"
+                                            <form id="update_theater" action="exec/theaters.php" method="post"
                                                   enctype="multipart/form-data">
                                                 <div class="row">
                                                     <div class="col-12">
                                                         <div class="form-group">
-                                                            <label>Screen</label>
-                                                            <input type="hidden" name="e_id"
-                                                                   value="<?php echo $row['id']; ?>">
-
-                                                            <select class="form-control" name="edit_screen"
-                                                                    id="edit_screen">
-                                                                <option value="<?php echo $row['theater']; ?>"><?php echo $row['theater']; ?></option>
-                                                                <option value="1">1</option>
-                                                                <option value="2">2</option>
-                                                            </select>
-                                                            <small></small>
+                                                            <label>Theater Name</label>
+                                                            <input class="form-control" name="edit-theater-name" id="edit-theater-name"
+                                                                   placeholder="Enter Theater Name" value="<?php echo $row['theater_name']; ?>">
                                                         </div>
                                                     </div>
                                                     <div class="col-12">
                                                         <div class="form-group">
-                                                            <label>show</label>
-                                                            <input type="time" class="form-control" name="edit_time"
-                                                                   id="edit_time" value="<?php echo $row['show']; ?>">
+                                                            <label>Theater Address</label>
+                                                            <input class="form-control" name="edit-theater-address" id="edit-theater-address"
+                                                                   placeholder="Enter Theater Address" value="<?php echo $row['theater_address']; ?>">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <div class="form-group">
+                                                            <label>Theater Phone</label>
+                                                            <input class="form-control" name="edit-theater-phone" id="edit-theater-phone"
+                                                                   placeholder="Enter Theater Phone" value="<?php echo $row['theater_phone']; ?>">
                                                         </div>
                                                     </div>
 
-                                                    <div class="col-12">
 
-                                                        <input type="submit" name="updatetime" id="updatetime"
-                                                               value="update" class="btn btn-primary">
+                                                    <div class="col-12">
+                                                        <input type="submit" name="edit-theater-btn" id="edit-theater-btn" value="submit" class="btn btn-primary">
                                                     </div>
+                                                    <input type="hidden" value="<?php echo $row['id']; ?>" name="e-id">
                                                 </div>
 
                                             </form>
@@ -125,10 +128,10 @@
                                             </button>
                                         </div>
                                         <div class="modal-body">
-                                            <form id="insert_movie" action="insert_data.php" method="post">
-                                                <h4> Xóa "<?php echo $row['id']; ?>" ? </h4>
-                                                <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
-                                                <input type="submit" name="deletetime" id="deletetime" value="OK"
+                                            <form id="delete_theater" action="exec/theaters.php" method="post">
+                                                <h4> Xóa theater"<?php echo $row['id']; ?>" ? </h4>
+                                                <input type="hidden" name="delete-theater-id" value="<?php echo $row['id']; ?>">
+                                                <input type="submit" name="delete-theater-btn" id="delete-theater-btn" value="OK"
                                                        class="btn btn-primary">
                                             </form>
 
@@ -162,35 +165,34 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form name="" id="insert_movie" action="insert_data.php" method="post"
+                    <form name="" id="add_theater" action="exec/theaters.php" method="post"
                           enctype="multipart/form-data" onsubmit="">
 
                         <div class="col-12">
                             <div class="form-group">
                                 <label>Theater Name</label>
-                                <input class="form-control" name="add_theater_name" id="add_theater_name"
-                                       placeholder="movie name">
+                                <input class="form-control" name="theater-name" id="add_theater_name"
+                                       placeholder="Enter Theater Name" value="<?php if(isset($_POST['theater-name'])) echo $_POST['theater-name']; ?>">
                             </div>
                         </div>
                         <div class="col-12">
                             <div class="form-group">
                                 <label>Theater Address</label>
-                                <input class="form-control" name="add_theater_address" id="add_theater_address"
-                                       placeholder="movie name">
+                                <input class="form-control" name="theater-address" id="add_theater_address"
+                                       placeholder="Enter Theater Address" value="<?php if(isset($_POST['theater-address'])) echo $_POST['theater-address']; ?>">
                             </div>
                         </div>
                         <div class="col-12">
                             <div class="form-group">
                                 <label>Theater Phone</label>
-                                <input class="form-control" name="add_theater_phone" id="add_theater_phone"
-                                       placeholder="movie name">
+                                <input class="form-control" name="theater-phone" id="add_theater_phone"
+                                       placeholder="Enter Theater Phone" value="<?php if(isset($_POST['theater-phone'])) echo $_POST['theater-phone']; ?>">
                             </div>
                         </div>
 
 
-                        <input type="hidden" name="add_product" value="1">
                         <div class="col-12">
-                            <input type="submit" name="add_theater_btn" id="addshow" value="submit" class="btn btn-primary">
+                            <input type="submit" name="add-theater-btn" id="add-theater-btn" value="submit" class="btn btn-primary">
                         </div>
 
 

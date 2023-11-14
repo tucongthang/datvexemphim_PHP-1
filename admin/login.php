@@ -19,13 +19,10 @@
 
 
 
-        $password_query = "SELECT password FROM admin WHERE name='" . $uname . "'";
+        $password_query = "SELECT password FROM admin WHERE username='" . $uname . "'";
         $result = mysqli_query($conn, $password_query);
         $row = mysqli_fetch_array($result);
         $password_verify = $row['password'];
-
-        echo $password;
-        echo $password_verify;
 
         if (password_verify($password, $password_verify)) {
                 $_SESSION['admin'] = $uname;

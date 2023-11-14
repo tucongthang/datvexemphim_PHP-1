@@ -106,7 +106,7 @@ if (isset($_POST['addshow'])) {
     if (!$insert_record) {
         echo "hii";
     } else {
-        echo "<script> window.location.href='Showtimes.php' </script>";
+        echo "<script> window.location.href='showtimes.php' </script>";
     }
 
 }
@@ -125,7 +125,7 @@ if (isset($_POST['updatetime'])) {
     }
 
     {
-        echo "<script> window.location.href='Showtimes.php' </script>";
+        echo "<script> window.location.href='showtimes.php' </script>";
     }
 
 }
@@ -135,7 +135,7 @@ if (isset($_POST['deletetime'])) {
     $id = mysqli_real_escape_string($conn, $_POST['id']);
 
     $sql = mysqli_query($conn, "DELETE FROM theater_show WHERE id=$id");
-    echo "<script> window.location.href='Showtimes.php' </script>";
+    echo "<script> window.location.href='showtimes.php' </script>";
 }
 
 
@@ -212,7 +212,7 @@ if (isset($_POST['add_user'])) {
     if (!$insert_record) {
         echo "hii";
     } else {
-        echo "<script> window.location.href='Users.php' </script>";
+        echo "<script> window.location.href='users.php' </script>";
     }
 
 }
@@ -257,7 +257,7 @@ if (isset($_POST['updateusers'])) {
     if (!$update_record) {
         echo "unsuccesfull";
     } else {
-        echo "<script> window.location.href='Users.php' </script>";
+        echo "<script> window.location.href='users.php' </script>";
     }
 
 }
@@ -267,7 +267,7 @@ if (isset($_POST['deleteuser'])) {
     $id = mysqli_real_escape_string($conn, $_POST['id']);
 
     $sql = mysqli_query($conn, "DELETE FROM user WHERE id=$id");
-    echo "<script> window.location.href='Users.php' </script>";
+    echo "<script> window.location.href='users.php' </script>";
 
 
 }
@@ -291,7 +291,7 @@ if (isset($_POST['customers'])) {
     if (!$insert_record) {
         echo "hii";
     } else {
-        echo "<script> window.location.href='Bookings.php' </script>";
+        echo "<script> window.location.href='bookings.php' </script>";
     }
 
 }

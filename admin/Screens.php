@@ -43,11 +43,20 @@
                     <tbody id="product_list">
                     <?php
                     require_once("../config/db_connect.php");
-                    $query = "SELECT screens.*,theaters.theater_name FROM screens,theaters";
+
+
+                    $query = "SELECT
+                                screens.*,
+                                theaters.theater_name 
+                            FROM
+                                screens
+                                INNER JOIN theaters ON screens.theater_id = theaters.id";
                     $result = mysqli_query($conn, $query);
+
 
                     if (mysqli_num_rows($result) > 0) {
                         while ($row = mysqli_fetch_array($result)) {
+
                             ?>
                             <tr>
                                 <td><?php echo $row['id']; ?></td>
@@ -73,35 +82,41 @@
                                             </button>
                                         </div>
                                         <div class="modal-body">
-                                            <form id="insert_movie" action="insert_data.php" method="post"
+                                            <form id="insert_movie" action="exec/screens.php" method="post"
                                                   enctype="multipart/form-data">
                                                 <div class="row">
+
                                                     <div class="col-12">
                                                         <div class="form-group">
-                                                            <label>Screen</label>
-                                                            <input type="hidden" name="e_id"
-                                                                   value="<?php echo $row['id']; ?>">
+                                                            <label>Theater Name</label>
+                                                            <select class="form-control category_list" name="edit-theater-id">
+                                                                <option>Select Theater Name</option>
+                                                                <?php
+                                                                $resultTheaters = mysqli_query($conn, "SELECT * FROM theaters");
 
-                                                            <select class="form-control" name="edit_screen"
-                                                                    id="edit_screen">
-                                                                <option value="<?php echo $row['theater']; ?>"><?php echo $row['theater']; ?></option>
-                                                                <option value="1">1</option>
-                                                                <option value="2">2</option>
+                                                                if (mysqli_num_rows($resultTheaters) > 0) {
+                                                                    while ($rowTheaters = mysqli_fetch_array($resultTheaters)) {
+                                                                        ?>
+                                                                        <option value="<?php echo $rowTheaters['id']; ?>"><?php echo $rowTheaters['theater_name']; ?></option>
+                                                                        <?php
+                                                                    }
+                                                                }
+                                                                ?>
                                                             </select>
-                                                            <small></small>
                                                         </div>
                                                     </div>
+
                                                     <div class="col-12">
                                                         <div class="form-group">
-                                                            <label>show</label>
-                                                            <input type="time" class="form-control" name="edit_time"
-                                                                   id="edit_time" value="<?php echo $row['show']; ?>">
+                                                            <label>Screen Number</label>
+                                                            <input class="form-control" name="edit-screen-number" id="edit-screen-number"
+                                                                   placeholder="Enter Theater Name" value="<?php echo $row['screen_number']; ?>">
                                                         </div>
                                                     </div>
 
                                                     <div class="col-12">
 
-                                                        <input type="submit" name="updatetime" id="updatetime"
+                                                        <input type="submit" name="update-screen-btn" id="update-screen-btn"
                                                                value="update" class="btn btn-primary">
                                                     </div>
                                                 </div>
@@ -123,7 +138,7 @@
                                             </button>
                                         </div>
                                         <div class="modal-body">
-                                            <form id="insert_movie" action="insert_data.php" method="post">
+                                            <form id="insert_movie" action="exec/screens.php" method="post">
                                                 <h4> Xóa "<?php echo $row['id']; ?>" ? </h4>
                                                 <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
                                                 <input type="submit" name="deletetime" id="deletetime" value="OK"
@@ -160,23 +175,32 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form name="" id="insert_movie" action="insert_data.php" method="post"
+                    <form name="" id="insert_movie" action="exec/screens.php" method="post"
                           enctype="multipart/form-data" onsubmit="">
 
                         <div class="col-12">
                             <div class="form-group">
-                                <label>theater-name</label>
-                                <select class="form-control" name="theater_name" id="theater_name">
-                                    <option value="">theater name</option>
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
+                                <label>Theater Name</label>
+                                <select class="form-control category_list" name="theater-id">
+                                    <option>Select Username</option>
+                                    <?php
+                                    $result = mysqli_query($conn, "SELECT * FROM theaters");
+                                    if (mysqli_num_rows($result) > 0) {
+                                        while ($row = mysqli_fetch_array($result)) {
+                                            ?>
+                                            <option value="<?php echo $row['id']; ?>"><?php echo $row['theater_name']; ?></option>
+                                            <?php
+                                        }
+                                    }
+                                    ?>
                                 </select>
                             </div>
                         </div>
                         <div class="col-12">
                             <div class="form-group">
-                                <label>Enter Show</label>
-                                <input type="time" name="show" id="show" required>
+                                <label>Screen Number</label>
+                                <input class="form-control" name="screen-number" id="screen-number"
+                                       placeholder="Enter Theater Name">
                             </div>
                         </div>
 
@@ -184,7 +208,7 @@
                         <input type="hidden" name="add_product" value="1">
                         <div class="col-12">
 
-                            <input type="submit" name="addshow" id="addshow" value="submit" class="btn btn-primary">
+                            <input type="submit" name="add-screen-btn" id="add-screen-btn" value="submit" class="btn btn-primary">
                         </div>
 
 
