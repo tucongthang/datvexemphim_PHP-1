@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1:3306
--- Thời gian đã tạo: Th10 14, 2023 lúc 02:53 PM
+-- Thời gian đã tạo: Th10 14, 2023 lúc 05:03 PM
 -- Phiên bản máy phục vụ: 10.4.24-MariaDB
 -- Phiên bản PHP: 8.1.6
 
@@ -63,7 +63,8 @@ CREATE TABLE `booking` (
 --
 
 INSERT INTO `booking` (`id`, `user_id`, `seats`, `total_seats`, `booking_date`, `showtime_id`, `total_price`) VALUES
-(1, 2, 'A3, D4', 2, '2023-11-10', 1, '0.00');
+(1, 2, 'A3, D4', 2, '2023-11-10', 1, '0.00'),
+(11, 2, 'D3, A4', 10, '2023-11-14', 1, '100.00');
 
 -- --------------------------------------------------------
 
@@ -84,7 +85,7 @@ CREATE TABLE `feedback` (
 
 INSERT INTO `feedback` (`id`, `name`, `email`, `message`) VALUES
 (1, 'testuser', 'testuser@gmail.com', 'test'),
-(2, 'testuser', 'testuser@gmail.com', 'test');
+(3, 'Test', 'test@gmail.com', 'Test');
 
 -- --------------------------------------------------------
 
@@ -238,7 +239,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `name`, `email`, `password`, `phone`, `birthday`, `image`, `gender`) VALUES
-(2, 'testuser', 'Test', 'testuser@gmail.com', '$2y$10$6noXYUXjQoG1ms1DacPxMO8dtde.ppTMbOeAqZKyC0as.L/nHC2gG', '0929322222', 'testuser', '64349336_422464855151892_7422161348181622784_n.jpg', b'0');
+(2, 'testuser', 'Test', 'testuser@gmail.com', '$2y$10$6noXYUXjQoG1ms1DacPxMO8dtde.ppTMbOeAqZKyC0as.L/nHC2gG', '0929322222', '2023-11-16', '64349336_422464855151892_7422161348181622784_n.jpg', b'1'),
+(7, 'tindan', 'Jin Pham', 'tindan@gmail.com', '$2y$10$tnG7n.Tl8/YWtF4WH9qwbu6l5.N1bQx5ApcucfFlaYVSsBHku2ypC', '02931322322', '2023-11-09', '391757454_718135037010319_7638684070599160427_n.jpg', b'1'),
+(10, 'tindan2', 'tindan', 'tindan@gmail.com', '$2y$10$Yu8Syazb9/WY0HK70WOi0u6p5IFQhmLn/N6Qw7EFi4YrvFN8YP0S6', '02931322322', '2023-11-15', '118914956_1313702765640982_9209319587640248673_n.jpg', b'1');
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -304,7 +307,8 @@ ALTER TABLE `theaters`
 -- Chỉ mục cho bảng `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`) USING BTREE;
+  ADD PRIMARY KEY (`id`) USING BTREE,
+  ADD UNIQUE KEY `username` (`username`);
 
 --
 -- AUTO_INCREMENT cho các bảng đã đổ
@@ -320,13 +324,13 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT cho bảng `booking`
 --
 ALTER TABLE `booking`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT cho bảng `feedback`
 --
 ALTER TABLE `feedback`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT cho bảng `genre`
@@ -344,7 +348,7 @@ ALTER TABLE `movies`
 -- AUTO_INCREMENT cho bảng `screens`
 --
 ALTER TABLE `screens`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT cho bảng `showtimes`
@@ -362,7 +366,7 @@ ALTER TABLE `theaters`
 -- AUTO_INCREMENT cho bảng `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Các ràng buộc cho các bảng đã đổ
