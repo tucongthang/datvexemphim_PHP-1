@@ -11,8 +11,8 @@ if (isset($_POST['submit'])) {
     $action = mysqli_real_escape_string($conn, $_POST['action']);
     $description = mysqli_real_escape_string($conn, $_POST['description']);
     $show = mysqli_real_escape_string($conn, implode(',', $_POST['show']));
-    $filename = $_FILES['img']['name'];
 
+    $filename = $_FILES['img']['name'];
     $location = 'image/' . $filename;
 
 
