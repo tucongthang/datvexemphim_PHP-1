@@ -17,11 +17,29 @@
     <link rel="stylesheet" href="assets/css/bootstrap.min.css" type="text/css">
     <link rel="stylesheet" href="assets/css/seatbooking.css" type="text/css">
 
+    <style>
+        .body{
+            background-color: white;
+        }
+    </style>
 </head>
 
 <body>
 
-
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+            <a class="nav-item nav-link active" href="#">Chọn phim/Rạp/Suất <span class="sr-only">(current)</span></a>
+            <a class="nav-item nav-link" href="#">Chọn ghế</a>
+            <a class="nav-item nav-link" href="#">Chọn thức ăn</a>
+            <a class="nav-item nav-link" href="#">Thanh toán</a> 
+            </div>
+        </div>
+</nav>
 
 <h2>BOOK YOUR SEAT NOW</h2>
 
@@ -63,7 +81,7 @@ if (isset($_GET['showtimeId']) && isset($_GET['movieId'])) {
 
         <div class="row">
             <div class="col-lg-6">
-                <div class="screen"></div>
+                <div class="screen">
 
                 <div class="seats-container mx-auto">
                     <div class="row d-flex justify-content-center align-items-center">
@@ -104,11 +122,11 @@ if (isset($_GET['showtimeId']) && isset($_GET['movieId'])) {
                         <small>Available</small>
                     </li>
                     <li>
-                        <div class="seat-sample selected"></div>
+                        <div class="seat-sample selected" style="background-color: #00FFFF"></div>
                         <small>Selected</small>
                     </li>
                     <li>
-                        <div class="seat-sample occupied"></div>
+                        <div class="seat-sample occupied" style="background-color: white"></div>
                         <small>Occupied</small>
                     </li>
                 </ul>

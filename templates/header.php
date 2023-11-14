@@ -2,6 +2,50 @@
 <!--<div id="preloder">-->
 <!--    <div class="loader"></div>-->
 <!--</div>-->
+<!-- css option -->
+<style>
+.dropdown_menu {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown_content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    right: 0;
+}
+
+.dropdown_menu:hover .dropdown_content {
+    display: block;
+}
+
+.dropdown_content a {
+    color: black;
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    text-align: center;
+}
+
+.dropdown_content a:hover {
+    background-color: #f1f1f1;
+}
+.dropbtn {
+    color: black;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+.dropdown_content {
+    text-align: center;
+}
+</style>
 
 <!-- Offcanvas Menu Begin -->
 <div class="offcanvas-menu-overlay"></div>
@@ -51,7 +95,12 @@
                                 }
                                 ?>
                                 <span>Hii <?php echo $_SESSION['username']; ?></span>
-                                <a href="logout.php"> Logout</a>
+                                <div class="dropdown_menu">
+                                    <button class="dropbtn">&#9662;</button>
+                                    <div class="dropdown_content">
+                                        <a href="#">account</a>
+                                        <a href="#">history buy</a>
+                                        <a href="../logout.php"> Logout</a>
                             </div>
 
                         </div>
