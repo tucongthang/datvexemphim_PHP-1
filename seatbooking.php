@@ -23,11 +23,46 @@
         }
     </style>
 </head>
+<style>
+    .text{
+        color: black;
+    }
+     body {
+        background-color: white;
+    }
+    .screen {
+        background-color: black;
+    }
+    .seat {
+        width: 35px;
+        height: 30px;
+        margin: 5px;
+        background-color: #ccc;
+        border: 1px solid #000;
+    }
+    .seat-sample{
+        width: 30px;
+        height: 30px;
+        margin: 5px;
+    }
+    .button-group {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
 
+    .back-link {
+        margin: 25px;
+        margin-right: 150px;
+    }
+    h2{
+        margin: 5px;
+    }
+</style>
 <body>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Navbar</a>
+        <a class="navbar-brand" href="#">Azir movie</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -41,6 +76,8 @@
         </div>
 </nav>
 
+
+
 <h2>BOOK YOUR SEAT NOW</h2>
 
 <?php
@@ -51,7 +88,7 @@ if (isset($_GET['showtimeId']) && isset($_GET['movieId'])) {
 
     $result = mysqli_query($conn, "SELECT * FROM booking WHERE showtime_id = '" . $showtimeId . "' && booking_date = '" . $date . "'");
 
-    $queryMovie = "SELECT movies.title, DATE_FORMAT(showtimes.showtime, '%Y-%m-%d') AS show_date, DATE_FORMAT(showtimes.showtime, '%H:%i') AS show_time
+    $queryMovie = "SELECT movies.title, movies.image, DATE_FORMAT(showtimes.showtime, '%Y-%m-%d') AS show_date, DATE_FORMAT(showtimes.showtime, '%H:%i') AS show_time
               FROM showtimes
               INNER JOIN movies ON showtimes.movie_id = movies.id
               WHERE showtimes.id = $showtimeId";
@@ -60,6 +97,7 @@ if (isset($_GET['showtimeId']) && isset($_GET['movieId'])) {
 
     if ($row = mysqli_fetch_assoc($resultMovie)) {
         $movieTitle = $row['title'];
+        $movieImage = $row['image'];
         $showDate = $row['show_date'];
         $showTime = $row['show_time'];
     }
@@ -80,21 +118,21 @@ if (isset($_GET['showtimeId']) && isset($_GET['movieId'])) {
     <form action="payment.php" method="POST">
 
         <div class="row">
-            <div class="col-lg-6">
-                <div class="screen">
+            <div class="col-lg-7">
+                <div class="screen"></div>
 
                 <div class="seats-container mx-auto">
-                    <div class="row d-flex justify-content-center align-items-center">
-                        <?php
-                        $seats = array("A1", "A2", "A3", "A4", "B1", "B2", "B3", "B4");
-                        foreach ($seats as $seat) {
-                            $seatClass = in_array($seat, $occupiedSeats) ? 'occupied' : '';
-                            echo '<div class="seat ' . $seatClass . '" data-seat="' . $seat . '"></div>';
-                        }
-                        ?>
-                    </div>
+                <div class="row d-flex justify-content-center align-items-center">
+                    <?php
+                    $seats = array("A1", "A2", "A3", "A4", "B1", "B2", "B3", "B4");
+                    foreach ($seats as $seat) {
+                        $seatClass = in_array($seat, $occupiedSeats) ? 'occupied' : '';
+                        echo '<div class="seat ' . $seatClass . '" data-seat="' . $seat . '"></div>';
+                    }
+                    ?>
+                </div>
 
-                    <div class="row d-flex justify-content-center align-items-center">
+                <div class="row d-flex justify-content-center align-items-center">
                         <?php
                         $seats = array("C1", "C2", "C3", "C4", "D1", "D2", "D3", "D4");
 
@@ -135,43 +173,41 @@ if (isset($_GET['showtimeId']) && isset($_GET['movieId'])) {
 
 
                 <input type="hidden" name="showtimeId" value="<?php echo $showtimeId; ?>">
+                <div class="hr" style="border-bottom: 3px solid #FFA500;"></div>
 
             </div>
-            <div class="col-lg-6">
+            <div class="col-lg-5">
+                <div class="hr" style="border-bottom: 3px solid #FFA500; margin:10px"></div>
                 <table>
                     <tr>
-                        <td width="50%"><font size="5px" style="font-weight: bold">Movie:</font></td>
-                        <td bgcolor="79F9E2">
-                            <center><font size=5 style="font-family: Shruti; "><?php echo $movieTitle ?></font>
-                            </center>
+                        <td><img src="..\online-movie-booking\image/<?php echo $movieImage; ?>"width="200" height="300"></td>
+                        <td>
+                            <font size=6 style="font-family: Shruti; color:black"><?php echo $movieTitle ?></font>
+                            <font size="3px" style="display: block; color:black">2D phụ đề</font>
                         </td>
                     </tr>
                     <tr>
-                        <td width="50%"><font size="5px" style="font-weight: bold;">Date:</font></td>
-                        <td bgcolor="ECF68C">
-                            <center><font size=5 style=""><?php echo $showDate ?></font>
-                            </center>
+                        <td >
+                            <font size="4px" style="font-weight: bold; color:black">Suất:</font>
+                            <font size=3 style="color:black"><?php echo $showTime ?></font>
+                        </td>
+                        <td>
+                            <font size="4px" style="font-weight: bold; color:black">- Ngày:</font>
+                            <font size=3 style="color:black"><?php echo $showDate ?></font>
                         </td>
                     </tr>
                     <tr>
-                        <td width="50%"><font size="5px" style="font-weight: bold;">Time:</font></td>
-                        <td bgcolor="ECF68C">
-                            <center><font size=5 style=""><?php echo $showTime ?></font>
-                            </center>
-                        </td>
+                        <td style="color: #FFA500">------------------------------</td>
+                        <td style="color: #FFA500">------------------------------</td>
                     </tr>
                     <tr>
-                        <td width="50%"><font size="5px" style="font-weight: bold;">Seat:</font></td>
-                        <td><input type="text" id="selected-seats" name="selected-seats" placeholder="selected checkboxs"></td>
-                    </tr>
-                    <tr>
-                        <td width="50%"><font size="5px" style="font-weight: bold;">Total Seat:</font>
-                        </td>
-                        <td><input type="text" id="count" name="total-seats" placeholder="Total Seats"></td>
+                        <td><input type="text" id="selected-seats" name="selected-seats" placeholder="selected checkboxs" readonly></td>
+                        <td><input type="text" id="count" name="total-seats" placeholder="Total Seats" readonly></td>
                     </tr>
 <!--                    <input type="hidden" name="movie" value="--><?php //echo $movieTitle ?><!--">-->
 <!--                    <input type="hidden" name="show" value="--><?php //echo $showtime ?><!--">-->
                 </table>
+
 
             <?php
             if (!isset($_SESSION['username'])) {
@@ -194,9 +230,12 @@ if (isset($_GET['showtimeId']) && isset($_GET['movieId'])) {
                 <?php
             } else {
                 ?>
-                <div class="col-lg-12">
+                <div class="col-lg-6">
                     <div class="form-group">
-                        <input type="submit" value="Payment Now" name="submit" class="form-control btn btn-primary py-2">
+                        <div class="button-group">
+                            <a href="javascript:window.history.back(-1);" class="back-link">Back</a>
+                            <input type="submit" value="Payment Now" name="submit" class="form-control btn btn-primary py-2">
+                        </div>
                     </div>
                 </div>
 
