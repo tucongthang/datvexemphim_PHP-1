@@ -10,11 +10,8 @@
     <div class="offcanvas__option">
         <div class="offcanvas__links">
             <a href="login.html">Sign in</a>
-
         </div>
-
     </div>
-
     <div id="mobile-menu-wrap"></div>
 
 </div>
@@ -22,10 +19,10 @@
 
 <!-- Header Section Begin -->
 <header class="header">
-    <div class="header__top bg-light">
+    <div class="header__top">
         <div class="container">
             <div class="row">
-                <div class="col-lg-6 col-md-7 bg-dark">
+                <div class="col-lg-6 col-md-7">
 
                 </div>
                 <?php
@@ -56,9 +53,9 @@
                                     <span>Hii <?php echo $_SESSION['username']; ?></span>
                                 </button>
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <li><a class="dropdown-item" href="#">Option 1</a></li>
-                                    <li><a class="dropdown-item" href="#">Option 2</a></li>
-                                    <li><a class="dropdown-item" href="#">Option 3</a></li>
+                                    <li><a class="dropdown-item" href="#">Account</a></li>
+                                    <li><a class="dropdown-item" href="#">History Booking</a></li>
+                                    <li><a class="dropdown-item" href="logout.php">Logout</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -68,8 +65,8 @@
                             <div class="col-lg-6 col-md-6">
                                 <div class="header__top__right">
                                     <div class="header__top__links">
-                                        <a href="login.php">Sign in</a>
-                                        <a href="register.php">Register</a>
+                                        <a class="top__links--unlogin" href="login.php">Sign in</a>
+                                        <a class="top__links--unlogin" href="register.php">Register</a>
                                     </div>
 
                                 </div>

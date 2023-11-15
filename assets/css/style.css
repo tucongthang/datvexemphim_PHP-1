@@ -245,7 +245,7 @@ ol {
 }
 
 .header__top {
-	background: #343a40;
+	background: #111111;
 	padding: 10px 0;
 }
 
@@ -267,13 +267,13 @@ ol {
 	color : #ffff;
 }
 .header__top__links a {
-	color: #ffffff;
+/*	color: #ffffff;*/
 	font-size: 13px;
 	text-transform: uppercase;
 	letter-spacing: 2px;
-	margin-right: 28px;
+	/*margin-right: 28px;*/
 	display: inline-block;
-	margin-left: 20px;
+	/*margin-left: 20px;*/
 }
 .avatar {
   vertical-align: middle;
@@ -282,9 +282,19 @@ ol {
   border-radius: 50%;
 }
 
-.header__top__links a:last-child {
-	margin-right: 0;
+.top__links--unlogin {
+	color: #ffffff;
+	font-size: 13px;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+	margin-right: 28px;
+	display: inline-block;
+	margin-left: 20px;
 }
+
+/*.header__top__links a:last-child {*/
+/*	margin-right: 0;*/
+/*}*/
 
 .header__top__hover {
 	display: inline-block;

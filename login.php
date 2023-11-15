@@ -63,15 +63,12 @@
                         <form id="loginForm" action="" method="POST">
                             <table style="background-color:white;" class="table-condensed">
                                 <tr>
-                                    <a href="./index.html"><img src="assets/img/logo.png" alt="" width="180px"></a>
+                                    <a href="./index.html"><img src="assets/images/logo.png" alt="" width="180px"></a>
                                 </tr>
                                 <tr>
                                     <td>
                                         <hr style="background-color:blue;height:1px;margin:0px;"/>
                                     </td>
-                                </tr>
-                                <tr>
-                                    <div id="php-message"><?php echo isset($msg) ? $msg : ''; ?></div>
                                 </tr>
                                 <tr>
                                     <td><b>User Id:</b></td>
@@ -86,7 +83,7 @@
                                 <tr>
                                     <td><input type="password" class="inputbox" id="password" name="password" required/>
                                         <br>
-                                        <div id="msg"></div>
+                                        <p id="msg" class="mt-5 text-danger"><?php if (isset($msg)) echo $msg; ?></p>
                                     </td>
 
                                 </tr>
