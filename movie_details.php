@@ -20,31 +20,30 @@ $row = mysqli_fetch_array($result);
     <title><?php echo $row['title']; ?> Movie Details</title>
 
 
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css" type="text/css">
-    <link rel="stylesheet" href="assets/css/font-awesome.min.css" type="text/css">
-    <link rel="stylesheet" href="assets/css/elegant-icons.css" type="text/css">
-    <link rel="stylesheet" href="assets/css/magnific-popup.css" type="text/css">
-    <link rel="stylesheet" href="assets/css/nice-select.css" type="text/css">
-    <!--    <link rel="stylesheet" href="assets/css/owl.carousel.min.css" type="text/css">-->
-    <link rel="stylesheet" href="assets/css/slicknav.min.css" type="  text/css">
-    <!--    <link rel="stylesheet" href="assets/css/fonts-googleapis.css" type="  text/css">-->
-    <link rel="stylesheet" href="assets/css/style.css" type="text/css">
-    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <?php
+        include_once ('templates/styles.php')
+    ?>
 
     <style>
 
-        .modal-dialog {
-            max-width: 1500px;
-            margin-top: -1rem;
+        .container h2 {
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #222;
+            font-size: 30px;
+        }
+
+        .part-line {
+            border-bottom: solid 2px red;
+            margin-bottom: 25px;
+            margin-top: 25px;
         }
 
         .image-container {
-            overflow: hidden;
             position: relative;
         }
 
-        .detail{
+        .overlay {
             position: absolute;
             top: 0;
             left: 0;
@@ -58,20 +57,20 @@ $row = mysqli_fetch_array($result);
             justify-content: center;
         }
 
-        .detail-button {
+        .overlay-buttons {
             text-align: center;
             display: none;
         }
 
-        .image-container:hover .detail {
+        .image-container:hover .overlay {
             opacity: 1;
         }
 
-        .image-container:hover .detail-button {
+        .image-container:hover .overlay-buttons {
             display: block;
         }
 
-        .detail-buttons a {
+        .overlay-buttons a {
             color: #fff;
             padding: 10px 20px;
             margin-right: 10px;
@@ -81,7 +80,7 @@ $row = mysqli_fetch_array($result);
             transition: background-color 0.3s ease;
         }
 
-        .detail-buttons a:hover {
+        .overlay-buttons a:hover {
             background-color: #fff;
             color: #000;
         }
@@ -90,8 +89,13 @@ $row = mysqli_fetch_array($result);
             text-align: right;
         }
 
-        .detail-button {
+        .overlay-button {
             width: 150px;
+        }
+
+        .modal-dialog {
+            max-width: 1500px;
+            margin-top: -1rem;
         }
 
     </style>
@@ -144,28 +148,93 @@ $id = $row['id'];
 
         <div class="row feature design">
 
-            <div class="col-lg-4"><img src="admin/image/<?php echo $row['image']; ?>" class="resize-detail"
-                                       alt="" width="100%"></div>
-            <div class="col-lg-5">
-                
-                <div>
-                    <h2 class="mt-5"><?php echo $row['title']; ?></h2>
+            <div class="col-lg-9">
+                <div class="row">
+                    <div class="col-lg-5"><img src="uploads/<?php echo $row['image']; ?>" class="resize-detail"
+                                               alt="" width="100%"></div>
+                    <div class="col-lg-7">
 
-                    <div class="mb-4">
-                        <ion-icon class="text-warning" name="calendar-outline"> </ion-icon> <?php echo $row['release_date']; ?>
+                        <div>
+                            <h2 class="mt-5"><?php echo $row['title']; ?></h2>
+
+                            <div class="mb-4">
+                                <ion-icon class="text-warning" name="calendar-outline"> </ion-icon> <?php echo $row['release_date']; ?>
+                            </div>
+
+                            <div class="mb-4">
+                                <h4>Giám đốc: <?php echo $row['director']; ?></h4>
+                            </div>
+
+                            <div class="mb-4">
+                                <h4>Thể loại: <?php echo $row['genre_name']; ?></h4>
+                            </div>
+
+                            <div class="mb-4">
+                                <h4>Ngôn ngữ: <?php echo $row['language']; ?></h4>
+                            </div>
+                        </div>
                     </div>
+                </div>
+                <div class="row my-4">
+                    <?php if ($row['running'] == 1) { ?>
+                        <div class="col-md-12">
 
-                    <div class="mb-4">
-                        <h4>Giám đốc: <?php echo $row['director']; ?></h4>
+                            <div class="row">
+                                <div class="col-md-12 pb-2 mb-4 text-black border-bottom border-danger">
+                                    <h4>Lịch chiếu</h4>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <?php
+                                $query = "SELECT st.id as showtime_id, s.screen_number, t.theater_name, st.showtime 
+                                              FROM showtimes st 
+                                              INNER JOIN theaters t ON st.theater_id = t.id
+                                              INNER JOIN screens s ON st.screen_id = s.id
+                                              WHERE st.movie_id = '$movieId'";
+                                $result = mysqli_query($conn, $query);
+
+                                if (mysqli_num_rows($result) > 0) {
+                                    while ($showtime = mysqli_fetch_assoc($result)) {
+                                        ?>
+                                        <div class="col-md-3 mb-3">
+                                            <div class="card-body">
+                                                <h5 class="card-title"><?php echo $showtime['theater_name']; ?>
+                                                    (<?php echo date('F j, Y', strtotime($showtime['showtime'])); ?>)</h5>
+                                                <p class="card-text">Screen
+                                                    Number: <?php echo $showtime['screen_number']; ?></p>
+                                                <a class="btn btn-primary"
+                                                   href="seatbooking.php?movieId=<?php echo $movieId; ?>&showtimeId=<?php echo $showtime['showtime_id']; ?>">
+                                                    <p class="card-text text-white d-flex align-items-center"><?php echo date('H:i A', strtotime($showtime['showtime'])); ?></p>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <?php
+                                    }
+                                } else {
+                                    ?>
+                                    <p>
+                                        No showtimes available.
+                                    </p>
+                                    <?php
+                                } ?>
+                            </div>
+                        </div>
+                    <?php } ?>
+
+                </div>
+                <div class="row">
+                    <div class="description">
+                        <h4>Description</h4>
+                        <p>
+                            <!--                                            Jeff Lang (Tobey Maguire), an OBGYN, and his wife Nealy (Elizabeth Banks), who owns a small-->
+                            <!--                                            shop, live in Seattle with their two-year-old son named Miles. Considering a second child, they-->
+                            <!--                                            decide to enlarge their small home and lay expensive new grass in their backyard. Worms in the-->
+                            <!--                                            grass attract raccoons, who destroy the grass, and Jeff goes to great lengths to get rid of the-->
+                            <!--                                            raccoons, mixing poison with a can of tuna. Their neighbor Lila (Laura Linney) tells Jeff that-->
+                            <!--                                            her cat Matthew is missing, and Jeff does not yet realize he may be responsible.-->
+                            <?php echo $row['description']; ?>
+                        </p>
                     </div>
-
-                    <div class="mb-4">
-                        <h4>Thể loại: <?php echo $row['genre_name']; ?></h4>
-                    </div>
-
-                    <div class="mb-4">
-                        <h4>Ngôn ngữ: <?php echo $row['language']; ?></h4>
-                    </div>             
                 </div>
             </div>
             <div class="col-lg-3">
@@ -174,7 +243,7 @@ $id = $row['id'];
                 </div>
                 <div class="row">
                     <?php
-                    $currentMoviesQuery = "SELECT id, title, image FROM movies WHERE running = 1";
+                    $currentMoviesQuery = "SELECT id, title, image FROM movies WHERE running = 1 LIMIT 3";
                     $currentMoviesResult = mysqli_query($conn, $currentMoviesQuery);
 
                     if (mysqli_num_rows($currentMoviesResult) > 0) {
@@ -182,21 +251,22 @@ $id = $row['id'];
                             ?>
                             <div class="col-md-12 mb-3">
                                 <div class="image-container">
-                                    <div class="text-center position-relative">
-                                        <img src="uploads/<?php echo $currentMovie['image']; ?>" class="img-fluid mb-4" alt="Movie Image">
-                                        <h5 class="card-title"><?php echo $currentMovie['title']; ?></h5>
-                                        <div class="detail">
-                                            <div class="detail-button">
-                                                <div class="col">
-                                                    <div class="row">
-                                                        <a class="btn btn-primary" href="movie_details.php?pass=<?php echo $currentMovie['id']; ?>">
-                                                            Xem chi tiết
-                                                        </a>
-                                                    </div>
+                                    <img src="uploads/<?php echo $currentMovie['image']; ?>" alt="" class="w-100 img-fluid image-resize2">
+                                    <div class="overlay">
+                                        <div class="overlay-buttons">
+                                            <div class="col">
+                                                <div class="row">
+                                                    <a href="movie_details.php?pass=<?php echo $row['id']; ?>" class="btn btn-primary mx-auto overlay-button">
+                                                        <i class="fa fa-ticket"></i>
+                                                        Book Now
+                                                    </a>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+                                </div>
+                                <div>
+                                    <h5 class="mt-2 mb-1"><b><?php echo $row['title']; ?></b></h5>
                                 </div>
                             </div>
                         <?php
@@ -209,63 +279,6 @@ $id = $row['id'];
             </div>
         </div>
 
-        <div class="row">
-            <?php if ($row['running'] == 1) { ?>
-                <div class="col-md-12">
-
-                    <div class="row">
-                        <div class="col-md-12 pb-2 mb-4 text-black border-bottom border-danger">
-                            <h4>Lịch chiếu</h4>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <?php
-                        $query = "SELECT st.id as showtime_id, s.screen_number, t.theater_name, st.showtime 
-                                              FROM showtimes st 
-                                              INNER JOIN theaters t ON st.theater_id = t.id
-                                              INNER JOIN screens s ON st.screen_id = s.id
-                                              WHERE st.movie_id = '$movieId'";
-                        $result = mysqli_query($conn, $query);
-
-                        if (mysqli_num_rows($result) > 0) {
-                            while ($showtime = mysqli_fetch_assoc($result)) {
-                                ?>
-                                <div class="col-md-3 mb-3">
-                                    <div class="card-body">
-                                        <h5 class="card-title"><?php echo $showtime['theater_name']; ?>
-                                            (<?php echo date('F j, Y', strtotime($showtime['showtime'])); ?>)</h5>
-                                        <p class="card-text">Screen
-                                            Number: <?php echo $showtime['screen_number']; ?></p>
-                                        <a class="btn btn-primary"
-                                           href="seatbooking.php?movieId=<?php echo $movieId; ?>&showtimeId=<?php echo $showtime['showtime_id']; ?>">
-                                            <p class="card-text text-white d-flex align-items-center"><?php echo date('H:i A', strtotime($showtime['showtime'])); ?></p>
-                                        </a>
-                                    </div>
-                                </div>
-                                <?php
-                            }
-                        } else {
-                            echo "No showtimes available.";
-                        } ?>
-                    </div>
-                </div>
-            <?php } ?>
-
-        </div>
-        <div class="row">
-            <div class="description">
-                <h4>Description</h4>
-                <p>
-                    <!--                                            Jeff Lang (Tobey Maguire), an OBGYN, and his wife Nealy (Elizabeth Banks), who owns a small-->
-                    <!--                                            shop, live in Seattle with their two-year-old son named Miles. Considering a second child, they-->
-                    <!--                                            decide to enlarge their small home and lay expensive new grass in their backyard. Worms in the-->
-                    <!--                                            grass attract raccoons, who destroy the grass, and Jeff goes to great lengths to get rid of the-->
-                    <!--                                            raccoons, mixing poison with a can of tuna. Their neighbor Lila (Laura Linney) tells Jeff that-->
-                    <!--                                            her cat Matthew is missing, and Jeff does not yet realize he may be responsible.-->
-                    <?php echo $row['description']; ?>
-                </p>
-            </div>
-        </div>
         <?php
         }
         }

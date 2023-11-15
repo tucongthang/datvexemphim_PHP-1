@@ -13,34 +13,39 @@
     require_once('../config/db_connect.php');
     session_start();
 
-    if (isset($_POST['username']) || isset($_POST['password'])) {
-        $uname = mysqli_real_escape_string($conn, $_POST['username']);
-        $password = mysqli_real_escape_string($conn, $_POST['password']);
+    if(isset($_POST['login'])) {
+        if (isset($_POST['username']) || isset($_POST['password'])) {
+            $uname = mysqli_real_escape_string($conn, $_POST['username']);
+            $password = mysqli_real_escape_string($conn, $_POST['password']);
 
-        $password_query = "SELECT password FROM admin WHERE username='" . $uname . "'";
+            $password_query = "SELECT password FROM admin WHERE username='" . $uname . "'";
 
 
-        try {
+            try {
 
-            $result = mysqli_query($conn, $password_query);
+                $result = mysqli_query($conn, $password_query);
 
-            if (mysqli_num_rows($result) > 0) {
-                $row = mysqli_fetch_array($result);
-                $password_verify = $row['password'];
+                if (mysqli_num_rows($result) > 0) {
+                    $row = mysqli_fetch_array($result);
+                    $password_verify = $row['password'];
 
-                if (password_verify($password, $password_verify)) {
-                    $_SESSION['admin'] = $uname;
-                    header("Location: index.php");
+                    if (password_verify($password, $password_verify)) {
+                        $_SESSION['admin'] = $uname;
+                        header("Location: index.php");
+                        exit();
+                    } else {
+                        $msg = "Invalid Username or password.";
+                    }
                 } else {
                     $msg = "Invalid Username or password.";
                 }
-            } else {
-                $msg = "Invalid Username or password.";
+            } catch (Exception $e) {
+                $msg = "An error occurred: " . $e->getMessage();
             }
-        } catch (Exception $e) {
-            $msg = "An error occurred: " . $e->getMessage();
         }
     }
+
+
 
 ?>
 <div>
@@ -73,14 +78,13 @@
                                 <tr>
                                     <td><input type="password" class="inputbox" id="password" name="password" required/>
                                         <br>
-                                        <p id="msg" class="mt-5 text-danger"><?php if (isset($msg)) echo $msg; ?></p>
+                                        <p id="msg" class="mt-5 text-danger text-center"><?php if (isset($msg)) echo $msg; ?></p>
                                     </td>
 
                                 </tr>
                                 <tr>
-                                    <td align="center"><br/>
-
-                                        <button class="btn-normal" id="login">LOGIN</button>
+                                    <td align="center">
+                                        <input type="submit" class="btn-normal" name="login" id="login" value="LOGIN">
                                     </td>
                                 </tr>
 
@@ -94,6 +98,34 @@
                 </td>
             </tr>
         </table>
+    </div>
+</div>
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header text-center">
+                    <a href="./index.php"><img src="../assets/images/logo.png" alt="" width="180px"></a>
+                </div>
+                <div class="card-body">
+                    <form action="" method="post">
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Username:</label>
+                            <input type="text" class="form-control" id="username" name="username" required/>
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Password:</label>
+                            <input type="password" class="form-control" id="password" name="password" required/>
+                            <p id="msg" class="mt-3 text-danger"><?php if (isset($msg)) echo $msg; ?></p>
+                        </div>
+                        <div class="text-center">
+                            <button class="btn btn-primary" id="login">LOGIN</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 </body>

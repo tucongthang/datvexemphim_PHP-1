@@ -208,7 +208,7 @@ include("templates/footer.php");
             var genre_id = get_filter('genre');
             var language = get_filter('language');
             $.ajax({
-                url: "all_movie_fetch.php",
+                url: "all_movies_fetch.php",
                 method: "POST",
                 data: {action: action, search: search, director: director, genre_id: genre_id, language: language},
                 success: function (data) {

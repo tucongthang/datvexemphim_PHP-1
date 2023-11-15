@@ -8,7 +8,7 @@
     	<?php
     		if (isset($_SESSION['admin'])) {
     			?>
-    				<a class="btn btn-primary text-white" href="../admin/logout.php"><i class="fa fa-sign-out"></i> Sign out</a>
+    				<a class="btn btn-primary text-white mr-4" href="../admin/logout.php"><i class="fa fa-sign-out"></i> Sign out</a>
     			<?php
     		}
     	?>

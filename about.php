@@ -121,7 +121,7 @@ include("templates/header.php");
             <div class="col-md-4">
 
                 <div class="dvPatron">
-                    <img src="assets/images/technology.jpg" class="resize" alt="#"/>
+                    <img src="assets/images/audience.jpg" class="resize" alt="#"/>
 
                 </div>
                 <div class="dvPatConetnt">

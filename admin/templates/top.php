@@ -26,9 +26,11 @@
           font-size: 3.5rem;
         }
       }
+
     </style>
     <!-- Custom styles for this template -->
     <link href="./css/dashboard.css" rel="stylesheet">
+    <link rel="stylesheet" href="./css/movies.css">
   </head>
 
  <body>

@@ -6,7 +6,10 @@ require_once('config/db_connect.php');
 
 if (isset($_POST["action"])) {
     $query = "
-		SELECT * FROM movies WHERE status = '1'
+    SELECT movies.*, genre.genre_name
+    FROM movies
+	INNER JOIN genre ON movies.genre_id = genre.id
+    WHERE status = '1'
 	";
 
     if (isset($_POST['search'])) {
@@ -37,7 +40,7 @@ if (isset($_POST["action"])) {
         foreach ($result as $row) {
             if ($row['running'] == 1) {
                 $output .= '
-			<div class="col-lg-4 col-md-5 col-sm-6 mb-3">
+			<div class="col-lg-4 col-md-5 col-sm-6 mb-3 bg-white p-1">
                 <div class="image-container">
                     <img src="uploads/' . $row['image'] . '" alt="" class="object-fit-cover w-100 img-fluid image-resize2">
                     <div class="overlay">
@@ -53,9 +56,10 @@ if (isset($_POST["action"])) {
                         </div>
                     </div>	
                 </div>
-                <div>
+                <div class="p-2 bg-dark text-white rounded">
+                    Title : ' . $row['title'] . ' <br />
 					Director : ' . $row['director'] . ' <br />
-					Category : ' . $row['genre_id'] . '<br />
+					Category : ' . $row['genre_name'] . '<br />
 					Language : ' . $row['language'] . '
                 </div>
             </div>
@@ -64,14 +68,14 @@ if (isset($_POST["action"])) {
 
             if ($row['running'] == 0) {
                 $output .= '
-			<div class="col-lg-4 col-md-5 col-sm-6 mb-3">
+			<div class="col-lg-4 col-md-5 col-sm-6 mb-3 p-1">
 				<div class="image-container">
                     <img src="uploads/' . $row['image'] . '" alt="" class="object-fit-cover w-100 img-fluid image-resize2">
                     <div class="overlay">
                         <div class="overlay-buttons">
                             <div class="col">
                                 <div class="row">
-                                    <a href="movie_details.php?pass=' . $row['id'] . '" class="btn btn-primary mx-auto overlay-button">
+                                    <a href="" class="btn btn-primary mx-auto overlay-button disabled">
                                         <i class="fa fa-spinner"></i>
                                         Upcomming
                                     </a>
@@ -79,11 +83,12 @@ if (isset($_POST["action"])) {
                             </div>
                         </div>
                     </div>
-                <div>					
-					director : ' . $row['director'] . ' <br />
-					category : ' . $row['genre_id'] . '<br />
+                </div>
+                <div class="p-2 bg-dark text-white rounded">
+                    Title : ' . $row['title'] . ' <br />
+					Director : ' . $row['director'] . ' <br />
+					Category : ' . $row['genre_name'] . '<br />
 					Language : ' . $row['language'] . '</p>
-					
 				</div>
 			</div>
 			';

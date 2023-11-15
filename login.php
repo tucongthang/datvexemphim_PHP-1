@@ -3,7 +3,7 @@
     <title> Login Page</title>
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="site.css"/>
+    <link rel="stylesheet" href="assets/css/site.css"/>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 </head>
@@ -13,18 +13,18 @@
     <?php
 
     require_once('config/db_connect.php');
+    session_start();
 
-    function hash_password($password)
-    {
-        return password_hash($password, PASSWORD_DEFAULT);
+    if (isset($_SESSION['user_id']) && isset($_SESSION['username'])) {
+        header("Location: index.php");
+        exit();
     }
 
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if (isset($_POST['login'])) {
 
         $username = mysqli_real_escape_string($conn, $_POST['username']);
         $password = mysqli_real_escape_string($conn, $_POST['password']);
 
-        // Lấy hash từ database dựa vào tên người dùng
         $query = "SELECT id, username, password FROM users WHERE username = '$username'";
         $result = mysqli_query($conn, $query);
 
@@ -35,7 +35,6 @@
                 $user = mysqli_fetch_assoc($result);
 
                 if (password_verify($password, $user['password'])) {
-                    session_start();
                     $_SESSION['user_id'] = $user['id'];
                     $_SESSION['username'] = $user['username'];
                     header("Location: index.php");
@@ -54,7 +53,7 @@
     }
     ?>
 
-    <div class="parent-container">
+    <div class="parent-container mx-auto vh-100">
 
         <table width="100%" height="100%">
             <tr>
@@ -71,7 +70,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td><b>User Id:</b></td>
+                                    <td><b>Username:</b></td>
                                 </tr>
                                 <tr>
                                     <td><input type="text" class="inputbox" id="username" name="username" required/>
@@ -83,14 +82,14 @@
                                 <tr>
                                     <td><input type="password" class="inputbox" id="password" name="password" required/>
                                         <br>
-                                        <p id="msg" class="mt-5 text-danger"><?php if (isset($msg)) echo $msg; ?></p>
+                                        <p id="msg" class="mt-5 text-danger text-center"><?php if (isset($msg)) echo $msg; ?></p>
                                     </td>
 
                                 </tr>
                                 <tr>
                                     <td align="center"><br/>
 
-                                        <button class="btn-normal" id="login">LOGIN</button>
+                                        <input type="submit" class="btn-normal" name="login" id="login" value="LOGIN">
                                     </td>
                                 </tr>
                                 <tr>

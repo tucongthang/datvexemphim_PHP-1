@@ -41,16 +41,16 @@
                                     if (mysqli_num_rows($result) > 0) {
                                         while ($row = mysqli_fetch_array($result)) {
                                             if ($row['image'] == '') {
-                                                echo '<img src="../assets/images/img_avatar.png" alt="Avatar" class="avatar">';
+                                                echo '<img src="../assets/images/img_avatar.png" alt="Avatar" class="avatar mr-2">';
                                             } else {
                                                 ?>  <img src="uploads/<?php echo $row["image"]; ?>" alt="Avatar"
-                                                         class="avatar">
+                                                         class="avatar mr-2">
                                                 <?php
                                             }
                                         }
                                     }
                                     ?>
-                                    <span class="font-weight-bold"><?php echo $_SESSION['username']; ?></span>
+                                    <span class="font-weight-bold mr-1"><?php echo $_SESSION['username']; ?></span>
                                 </button>
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                     <li><a class="dropdown-item" href="user_info.php"><i class="fa fa-user"></i> Account</a></li>
@@ -91,7 +91,7 @@
                 <nav class="header__menu mobile-menu">
                     <ul>
                         <li><a href="index.php">Home</a></li>
-                        <li><a href="all_movie.php">All Movie</a></li>
+                        <li><a href="all_movies.php">All Movie</a></li>
                         <li><a href="about.php">About US</a></li>
                         <li><a href="feedback.php">Feedback</a></li>
                         <li><a href="contact.php">Contacts</a></li>
