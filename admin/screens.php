@@ -27,9 +27,11 @@
                 <div class="col-2">
                     <button type="button" data-toggle="modal" data-target="#add_show" class="btn btn-primary btn-sm">Add Show</button>
                 </div>
-
-
             </div>
+
+            <?php
+            include_once ('templates/error.php')
+            ?>
 
             <div class="table-responsive">
                 <table class="table table-striped table-sm">
@@ -141,7 +143,7 @@
                                             <form id="insert_movie" action="exec/screens.php" method="post">
                                                 <h4> Xóa "<?php echo $row['id']; ?>" ? </h4>
                                                 <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
-                                                <input type="submit" name="deletetime" id="deletetime" value="OK"
+                                                <input type="submit" name="delete-screen-btn" id="delete-screen-btn" value="OK"
                                                        class="btn btn-primary">
                                             </form>
 
