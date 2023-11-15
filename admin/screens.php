@@ -155,7 +155,7 @@
                                         </div>
                                         <div class="modal-body">
                                             <form id="insert_movie" action="exec/screens.php" method="post">
-                                                <h4> Xóa "<?php echo $row['id']; ?>" ? </h4>
+                                                <h4> Are you want to delete ID "<?php echo $row['id']; ?>" ?</h4>
                                                 <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
                                                 <input type="submit" name="delete-screen-btn" id="delete-screen-btn"
                                                        value="OK"

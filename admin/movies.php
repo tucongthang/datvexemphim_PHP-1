@@ -45,12 +45,12 @@
                         <th>Release Date</th>
                         <th>language</th>
                         <th>Show</th>
-                        <th>Image</th>
+                        <th>Trailer</th>
                         <th>Action</th>
                         <th>Image</th>
-                        <th>Image</th>
-                        <th>Image</th>
-                        <th>Image</th>
+                        <th>Status</th>
+                        <th>Running</th>
+                        <th>Edit</th>
                         <th colspan="2">Actions</th>
                     </tr>
                     </thead>
@@ -254,7 +254,7 @@
                                         </div>
                                         <div class="modal-body">
                                             <form id="insert_movie" action="exec/movies.php" method="post">
-                                                <h4> Yor Sour This id "<?php echo $row['id']; ?>" is delete.</h4>
+                                                <h4> Are you sure want to delete this ID film "<?php echo $row['id']; ?>" ?</h4>
                                                 <input type="hidden" name="delete-movie-id"
                                                        value="<?php echo $row['id']; ?>">
                                                 <input type="submit" name="delete-movie-btn" id="delete-movie-btn"

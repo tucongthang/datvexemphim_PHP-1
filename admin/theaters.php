@@ -42,6 +42,7 @@
                         <th>Theater Name</th>
                         <th>Theater Address</th>
                         <th>Theater Phone</th>
+                        <th>Action</th>
                     </tr>
                     </thead>
                     <tbody id="product_list">
@@ -128,7 +129,7 @@
                                         </div>
                                         <div class="modal-body">
                                             <form id="delete_theater" action="exec/theaters.php" method="post">
-                                                <h4> Xóa theater"<?php echo $row['id']; ?>" ? </h4>
+                                                <h4> Are you sure want to delete Cinema number "<?php echo $row['id']; ?>" ? </h4>
                                                 <input type="hidden" name="delete-theater-id" value="<?php echo $row['id']; ?>">
                                                 <input type="submit" name="delete-theater-btn" id="delete-theater-btn" value="OK"
                                                        class="btn btn-primary">
