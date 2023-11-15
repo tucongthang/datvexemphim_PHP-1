@@ -32,6 +32,10 @@
                 </div>
             </div>
 
+            <?php
+            include_once("templates/error.php");
+            ?>
+
             <div class="table-responsive">
                 <table class="table table-striped table-sm">
                     <thead>
