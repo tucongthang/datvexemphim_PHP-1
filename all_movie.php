@@ -16,7 +16,7 @@ require_once('config/db_connect.php');
     <title>All movie page</title>
 
     <?php
-        include_once ('templates/styles.php')
+    include_once('templates/styles.php')
     ?>
 
     <style>
@@ -24,86 +24,89 @@ require_once('config/db_connect.php');
         .part-line {
             margin: 10px 0;
         }
+
         .left {
             background-color: #B4B4B3;
         }
+
         label {
             font-size: 20px;
         }
+
         .checkbox-wrapper-29 {
-    --size: 1rem;
-    --background: #fff;
-    font-size: var(--size);
-  }
+            --size: 1rem;
+            --background: #fff;
+            font-size: var(--size);
+        }
 
-  .checkbox-wrapper-29 *,
-  .checkbox-wrapper-29 *::after,
-  .checkbox-wrapper-29 *::before {
-    box-sizing: border-box;
-  }
+        .checkbox-wrapper-29 *,
+        .checkbox-wrapper-29 *::after,
+        .checkbox-wrapper-29 *::before {
+            box-sizing: border-box;
+        }
 
-  .checkbox-wrapper-29 input[type="checkbox"] {
-    visibility: hidden;
-    display: none;
-  }
+        .checkbox-wrapper-29 input[type="checkbox"] {
+            visibility: hidden;
+            display: none;
+        }
 
-  .checkbox-wrapper-29 .checkbox__label {
-    width: var(--size);
-  }
+        .checkbox-wrapper-29 .checkbox__label {
+            width: var(--size);
+        }
 
-  .checkbox-wrapper-29 .checkbox__label:before {
-    content: ' ';
-    display: block;
-    height: var(--size);
-    width: var(--size);
-    position: absolute;
-    top: calc(var(--size) * 0.125);
-    left: 0;
-    background: var(--background);  
-  }
+        .checkbox-wrapper-29 .checkbox__label:before {
+            content: ' ';
+            display: block;
+            height: var(--size);
+            width: var(--size);
+            position: absolute;
+            top: calc(var(--size) * 0.125);
+            left: 0;
+            background: var(--background);
+        }
 
-  .checkbox-wrapper-29 .checkbox__label:after {
-    content: ' ';
-    display: block;
-    height: var(--size);
-    width: var(--size);
-    border: calc(var(--size) * .14) solid #000;
-    transition: 200ms;
-    position: absolute;
-    top: calc(var(--size));
-    left: calc(var(--size) - var(--size)/2);
-    background: var(--background);  
-  }
+        .checkbox-wrapper-29 .checkbox__label:after {
+            content: ' ';
+            display: block;
+            height: var(--size);
+            width: var(--size);
+            border: calc(var(--size) * .14) solid #000;
+            transition: 200ms;
+            position: absolute;
+            top: calc(var(--size));
+            left: calc(var(--size) - var(--size) / 2);
+            background: var(--background);
+        }
 
-  .checkbox-wrapper-29 .checkbox__label:after {
-    transition: 100ms ease-in-out;
-  }
+        .checkbox-wrapper-29 .checkbox__label:after {
+            transition: 100ms ease-in-out;
+        }
 
-  .checkbox-wrapper-29 .checkbox__input:checked ~ .checkbox__label:after {
-    border-top-style: none; 
-    border-right-style: none;
-    -ms-transform: rotate(-45deg); /* IE9 */
-    transform: rotate(-45deg);
-    height: calc(var(--size) * .5);
-    border-color: green;
-  }
+        .checkbox-wrapper-29 .checkbox__input:checked ~ .checkbox__label:after {
+            border-top-style: none;
+            border-right-style: none;
+            -ms-transform: rotate(-45deg); /* IE9 */
+            transform: rotate(-45deg);
+            height: calc(var(--size) * .5);
+            border-color: green;
+        }
 
-  .checkbox-wrapper-29 .checkbox {
-    position: relative;
-    display: flex;
-    cursor: pointer;
-    /* Mobile Safari: */
-    -webkit-tap-highlight-color: rgba(0,0,0,0);   
-  }
+        .checkbox-wrapper-29 .checkbox {
+            position: relative;
+            display: flex;
+            cursor: pointer;
+            /* Mobile Safari: */
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+        }
 
-  .checkbox-wrapper-29 .checkbox__label:after:hover,
-  .checkbox-wrapper-29 .checkbox__label:after:active {
-     border-color: green; 
-  }
+        .checkbox-wrapper-29 .checkbox__label:after:hover,
+        .checkbox-wrapper-29 .checkbox__label:after:active {
+            border-color: green;
+        }
 
-  .checkbox-wrapper-29 .checkbox__label {
-    margin-right: calc(var(--size) * 0.45);
-  }
+        .checkbox-wrapper-29 .checkbox__label {
+            margin-right: calc(var(--size) * 0.45);
+        }
 
     </style>
 
@@ -128,7 +131,7 @@ include("templates/header.php");
             <div class="list-group">
                 <h3 class="part-line">Thể loại</h3>
                 <div class="rounded">
-                <?php
+                    <?php
                     $query = "
                         SELECT DISTINCT g.genre_name, genre_id
                         FROM movies m
@@ -142,18 +145,19 @@ include("templates/header.php");
                         ?>
                         <div class="list-group-item checkbox checkbox-wrapper-29">
                             <label class="ml-2"><input type="checkbox" class="common_selector genre checkbox__input"
-                                        value="<?php echo $row['genre_id']; ?>"> <span class="checkbox__label"></span> <?php echo $row['genre_name']; ?></label>
+                                                       value="<?php echo $row['genre_id']; ?>"> <span
+                                        class="checkbox__label"></span> <?php echo $row['genre_name']; ?></label>
                         </div>
                         <?php
                     }
-                ?>
+                    ?>
                 </div>
             </div>
 
             <div class="list-group">
                 <h3 class="part-line">Ngôn ngữ</h3>
                 <div class="rounded">
-                <?php
+                    <?php
                     $query = "
                         SELECT DISTINCT(language) FROM movies WHERE status = '1' ORDER BY language DESC
                         ";
@@ -163,11 +167,12 @@ include("templates/header.php");
                         ?>
                         <div class="list-group-item checkbox checkbox-wrapper-29">
                             <label class="ml-2"><input type="checkbox" class="common_selector language checkbox__input"
-                                        value="<?php echo $row['language']; ?>"> <span class="checkbox__label"></span> <?php echo $row['language']; ?></label>
+                                                       value="<?php echo $row['language']; ?>"> <span
+                                        class="checkbox__label"></span> <?php echo $row['language']; ?></label>
                         </div>
                         <?php
                     }
-                ?>
+                    ?>
                 </div>
             </div>
         </div>

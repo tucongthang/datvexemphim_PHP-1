@@ -114,14 +114,14 @@
       type:'post',
       data:{email:email,oldpassword:oldpassword,newpassword:newpassword},
       success:function(response){
-          if(response == 1){
-                                    window.location = "login.php";
-                                }else{
-                                     error = " <font color='red'>!Invalid UserId.</font> ";
-                                     document.getElementById( "msg" ).innerHTML = error;
-                                      return false;
-                                }
-        $("#message").html(response);
+    if(response == 1){
+            window.location = "login.php";
+        }else{
+             error = " <font color='red'>!Invalid UserId.</font> ";
+             document.getElementById( "msg" ).innerHTML = error;
+              return false;
+        }
+    $("#message").html(response);
       }
     });
   });

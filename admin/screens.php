@@ -170,6 +170,8 @@
 
                             <?php
                         }
+                    } else {
+                        echo "<tr><td colspan='12'>No records found</td></tr>";
                     }
                     ?>
                     </tbody>

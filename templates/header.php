@@ -36,7 +36,7 @@
                     <div class="header__top__right">
                         <div class="header__top__links">
                             <div class="dropdown">
-                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <button class="btn btn-fix btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <?php
                                     if (mysqli_num_rows($result) > 0) {
                                         while ($row = mysqli_fetch_array($result)) {
@@ -50,11 +50,11 @@
                                         }
                                     }
                                     ?>
-                                    <span>Hii <?php echo $_SESSION['username']; ?></span>
+                                    <span><?php echo $_SESSION['username']; ?></span>
                                 </button>
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <li><a class="dropdown-item" href="#">Account</a></li>
-                                    <li><a class="dropdown-item" href="#">History Booking</a></li>
+                                    <li><a class="dropdown-item" href="user_info.php">Account</a></li>
+                                    <li><a class="dropdown-item" href="history_booking.php">History Booking</a></li>
                                     <li><a class="dropdown-item" href="logout.php">Logout</a></li>
                                 </ul>
                             </div>
