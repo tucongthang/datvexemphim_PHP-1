@@ -30,18 +30,24 @@ if (isset($_POST['add-user-btn'])) {
         }
     }
 
-    $insert_record = mysqli_query($conn, "INSERT INTO `users` (`username`, `name`, `email`, `password`, `phone`, `birthday`, `gender`, `image`) 
+    try {
+
+        $insert_record = mysqli_query($conn, "INSERT INTO `users` (`username`, `name`, `email`, `password`, `phone`, `birthday`, `gender`, `image`) 
         VALUES ('$username', '$name', '$email', '$passwordHash', '$phone', '$birthday', '$gender', '$image')");
 
-    if (!$insert_record) {
-        $msg = "Insert unsuccessful";
+        if ($insert_record) {
+            $msg = "Insert successful";
+            $error = 0;
+        } else {
+            throw new Exception("Insert unsuccessful");
+        }
+    } catch (Exception $e) {
+        $msg = "An error occurred: " . $e->getMessage();
         $error = 1;
-    } else {
-        $msg = "Insert successful";
-        $error = 0;
     }
 
-    header("Location: ../users.php");
+    header("Location: ../users.php?msg=" . urlencode($msg) . "&error=" . $error);
+
     exit();
 }
 
@@ -79,8 +85,8 @@ if (isset($_POST['update-user-btn'])) {
     } else {
         $edit_image = $edit_old_image;
     }
-
-    $update_record = mysqli_query($conn, "UPDATE `users` SET 
+    try {
+        $update_record = mysqli_query($conn, "UPDATE `users` SET 
         `username` = '$edit_username', 
         `name` = '$edit_name', 
         `email` = '$edit_email', 
@@ -90,15 +96,19 @@ if (isset($_POST['update-user-btn'])) {
         `image` = '$edit_image'
         WHERE `id` = '$e_id'");
 
-    if (!$update_record) {
-        $msg = "Update unsuccessful";
+        if ($update_record) {
+            $msg = "Update successful";
+            $error = 0;
+        } else {
+            throw new Exception("Update unsuccessful");
+        }
+    } catch (Exception $e) {
+        $msg = "An error occurred: " . $e->getMessage();
         $error = 1;
-    } else {
-        $msg = "Update successful";
-        $error = 0;
     }
 
-    header("Location: ../users.php");
+    header("Location: ../users.php?msg=" . urlencode($msg) . "&error=" . $error);
+
     exit();
 }
 
@@ -107,20 +117,26 @@ if (isset($_POST['change-password'])) {
     $new_password = mysqli_real_escape_string($conn, $_POST['new-password']);
     $password = password_hash($new_password, PASSWORD_DEFAULT);
 
-    $update_record = mysqli_query($conn, "
+    try {
+
+        $update_record = mysqli_query($conn, "
         UPDATE `users` SET 
         `password` = '$password' 
         WHERE `id` = '$e_id'");
 
-    if (!$update_record) {
-        $msg = "Update password unsuccessful";
+        if ($update_record) {
+            $msg = "Update successful";
+            $error = 0;
+        } else {
+            throw new Exception("Update unsuccessful");
+        }
+    } catch (Exception $e) {
+        $msg = "An error occurred: " . $e->getMessage();
         $error = 1;
-    } else {
-        $msg = "Update password successful";
-        $error = 0;
     }
 
-    header("Location: ../users.php");
+    header("Location: ../users.php?msg=" . urlencode($msg) . "&error=" . $error);
+
     exit();
 }
 
@@ -129,15 +145,20 @@ if (isset($_POST['delete-user-btn'])) {
 
     $delete_record = mysqli_query($conn, "DELETE FROM `users` WHERE `id` = $id");
 
-    if (!$delete_record) {
-        $msg = "Delete unsuccessful";
+    try {
+        if ($delete_record) {
+            $msg = "Delete successful";
+            $error = 0;
+        } else {
+            throw new Exception("Delete unsuccessful");
+        }
+    } catch (Exception $e) {
+        $msg = "An error occurred: " . $e->getMessage();
         $error = 1;
-    } else {
-        $msg = "Delete successful";
-        $error = 0;
     }
 
-    header("Location: ../users.php");
+    header("Location: ../users.php?msg=" . urlencode($msg) . "&error=" . $error);
+
     exit();
 }
 

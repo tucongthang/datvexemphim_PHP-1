@@ -28,16 +28,7 @@
                     <button type="button" data-toggle="modal" data-target="#add_show" class="btn btn-primary btn-sm">Add Show</button>
                 </div>
 
-            </div>
 
-            <?php
-                include_once("templates/error.php");
-            ?>
-
-            <div class="row">
-                <?php
-                include_once("templates/error.php");
-                ?>
             </div>
 
             <div class="table-responsive">
@@ -118,7 +109,7 @@
                                                     <div class="col-12">
                                                         <div class="form-group">
                                                             <label>Screen Number</label>
-                                                            <input type="text" class="form-control" name="edit-screen-number" id="edit-screen-number"
+                                                            <input class="form-control" name="edit-screen-number" id="edit-screen-number"
                                                                    placeholder="Enter Theater Name" value="<?php echo $row['screen_number']; ?>">
                                                         </div>
                                                     </div>
@@ -150,7 +141,7 @@
                                             <form id="insert_movie" action="exec/screens.php" method="post">
                                                 <h4> Xóa "<?php echo $row['id']; ?>" ? </h4>
                                                 <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
-                                                <input type="submit" name="delete-screen-btn" id="delete-screen-btn" value="OK"
+                                                <input type="submit" name="deletetime" id="deletetime" value="OK"
                                                        class="btn btn-primary">
                                             </form>
 

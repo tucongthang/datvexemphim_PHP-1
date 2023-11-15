@@ -26,17 +26,13 @@ if (isset($_POST['add-movie-btn'])) {
 
     $image = '';
 
-    try {
-        if (in_array($file_extension, $image_ext)) {
-            if (move_uploaded_file($_FILES['movie-image']['tmp_name'], $location)) {
-                $image = $location;
-            } else {
-                throw new Exception("Image upload failed");
-            }
-        } else {
-            throw new Exception("Invalid image format");
+    if (in_array($file_extension, $image_ext)) {
+        if (move_uploaded_file($_FILES['movie-image']['tmp_name'], $location)) {
+            $image = $location;
         }
-
+    }
+//    echo $image;
+    try {
         $insert_record = mysqli_query($conn, "INSERT INTO `movies` 
             (`description`, `trailer_link`, `language`, `genre_id`, `release_date`, `director`, `title`, `image`, `status`, `running`) 
             VALUES ('$description', '$trailer_link', '$language', '$genre_id', '$release_date', '$director', '$title', '$image', '$status', '$running')");
@@ -50,8 +46,8 @@ if (isset($_POST['add-movie-btn'])) {
     } catch (Exception $e) {
         $msg = "An error occurred: " . $e->getMessage();
         $error = 1;
-
     }
+
     header("Location: ../movies.php?msg=" . urlencode($msg) . "&error=" . $error);
     exit();
 }
@@ -117,14 +113,15 @@ if (isset($_POST['edit-movie-btn'])) {
     } catch (Exception $e) {
         $msg = "An error occurred: " . $e->getMessage();
         $error = 1;
-
     }
+
     header("Location: ../movies.php?msg=" . urlencode($msg) . "&error=" . $error);
     exit();
 }
 
 if (isset($_POST['delete-movie-btn'])) {
     $id = mysqli_real_escape_string($conn, $_POST['delete-movie-id']);
+
     try {
         $delete_record = mysqli_query($conn, "DELETE FROM `movies` WHERE `id` = $id");
 

@@ -28,11 +28,12 @@
                 <div class="col-2">
                     <button type="button" data-toggle="modal" data-target="#add_theater" class="btn btn-primary btn-sm">Add Theater</button>
                 </div>
-            </div>
 
-            <?php
-                include_once("templates/error.php");
-            ?>
+                <?php
+                    include_once("templates/error.php");
+                ?>
+
+            </div>
 
             <div class="table-responsive">
                 <table class="table table-striped table-sm">

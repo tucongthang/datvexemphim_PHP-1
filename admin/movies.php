@@ -23,18 +23,14 @@
 
             <div class="row">
                 <div class="col-10">
-                    <h2>Movies</h2>
+                    <h2>Add movie</h2>
                 </div>
                 <div class="col-2">
-                    <button data-toggle="modal" data-target="#add_movie_modal" class="btn btn-primary btn-sm">
-                        Add Movie
+                    <button data-toggle="modal" data-target="#add_movie_modal" class="btn btn-primary btn-sm">Add
+                        Movie
                     </button>
                 </div>
             </div>
-
-            <?php
-                include_once('templates/error.php');
-            ?>
 
             <div class="table-responsive">
                 <table class="table table-striped table-sm">
@@ -51,7 +47,7 @@
                         <th>Image</th>
                         <th>Image</th>
                         <th>Image</th>
-                        <th colspan="2">Actions</th>
+                        <th>Actions</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -79,10 +75,10 @@
                                 <td><?php echo $row['language']; ?></td>
                                 <td><?php echo $row['trailer_link']; ?></td>
                                 <td><?php echo $row['description']; ?></td>
-                                <td><img src="../uploads/<?php echo $row['image']; ?>" alt="" class="resize"></td>
-                                <td><?php echo ($row['status'] == 1) ? "Active" : "Inactive" ?></td>
-                                <td><?php echo ($row['running'] == 1) ? "Running" : "Upcomming" ?></td>
-<!--                                <td><img src="../../uploads/--><?php //echo $row['image']; ?><!--" alt="" class="resize"></td>-->
+                                <td><?php echo $row['image']; ?></td>
+                                <td><?php echo $row['status']; ?></td>
+                                <td><?php echo $row['running']; ?></td>
+                                <td><img src="image/<?php echo $row['image']; ?>" alt="" class="resize"></td>
                                 <td>
                                     <button data-toggle="modal" type="button"
                                             data-target="#edit_movie_modal<?php echo $id; ?>"
@@ -110,7 +106,7 @@
                                             </button>
                                         </div>
                                         <div class="modal-body">
-                                            <form id="insert_movie" action="exec/movies.php" method="post"
+                                            <form id="insert_movie" action="insert_data.php" method="post"
                                                   enctype="multipart/form-data">
                                                 <div class="row">
                                                     <div class="col-12">
@@ -118,8 +114,8 @@
                                                             <label>Title</label>
                                                             <input type="hidden" name="e_id"
                                                                    value="<?php echo $row['id']; ?>">
-                                                            <input class="form-control" name="edit-movie-title"
-                                                                   id="edit-movie-title"
+                                                            <input class="form-control" name="edit_title"
+                                                                   id="edit_movie_name"
                                                                    value="<?php echo $row['title']; ?>">
                                                             <small></small>
                                                         </div>
@@ -127,23 +123,23 @@
                                                     <div class="col-12">
                                                         <div class="form-group">
                                                             <label>Director Name</label>
-                                                            <input class="form-control" name="edit-movie-director"
-                                                                   id="edit-movie-director"
+                                                            <input class="form-control" name="edit_director"
+                                                                   id="edit_directer_name"
                                                                    value="<?php echo $row['director']; ?>">
                                                         </div>
                                                     </div>
                                                     <div class="col-12">
                                                         <div class="form-group">
                                                             <label>Release Date</label>
-                                                            <input type="date" class="form-control" name="edit-movie-release-date"
-                                                                   id="edit-movie-release-date"
+                                                            <input type="date" class="form-control" name="edit_director"
+                                                                   id="edit_directer_name"
                                                                    value="<?php echo $row['release_date']; ?>">
                                                         </div>
                                                     </div>
                                                     <div class="col-12">
                                                         <div class="form-group">
                                                             <label>Genre</label>
-                                                            <select class="form-control" name="edit-movie-genre-id" id="edit-movie-genre-id">
+                                                            <select class="form-control" name="edit_genre" id="genre">
                                                                 <?php
                                                                 $queryGenre = "SELECT id, genre_name FROM genre";
                                                                 $resultGenre = $conn->query($queryGenre);
@@ -157,7 +153,7 @@
                                                     <div class="col-12">
                                                         <div class="form-group">
                                                             <label>Language</label>
-                                                            <input type="text" name="edit-movie-language" id="edit-movie-language"
+                                                            <input type="text" name="edit_language" id="edit_language"
                                                                    class="form-control"
                                                                    value="<?php echo $row['language']; ?>">
                                                         </div>
@@ -165,22 +161,15 @@
                                                     <div class="col-12">
                                                         <div class="form-group">
                                                             <label>Trailer Link</label>
-                                                            <input type="text" name="edit-movie-trailer-link" id="edit-movie-trailer-link"
+                                                            <input type="text" name="edit_trailer" id="edit_trailer"
                                                                    class="form-control"
                                                                    value="<?php echo $row['trailer_link']; ?>">
                                                         </div>
                                                     </div>
                                                     <div class="col-12">
                                                         <div class="form-group">
-                                                            <label>Description</label>
-                                                            <textarea type="text" name="edit-movie-description" id="edit-movie-description"
-                                                                      class="form-control"><?php echo $row['description']; ?></textarea>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-12">
-                                                        <div class="form-group">
                                                             <label>Status</label>
-                                                            <select class="form-control" name="edit-movie-status" id="edit-movie-status">
+                                                            <select class="form-control" name="edit_status" id="edit_status">
                                                                 <option value="1">Active</option>
                                                                 <option value="0">Inactive</option>
                                                             </select>
@@ -189,28 +178,36 @@
                                                     <div class="col-12">
                                                         <div class="form-group">
                                                             <label>Running</label>
-                                                            <select class="form-control" name="edit-movie-running" id="edit-movie-running">
-                                                                <option value="1">Running</option>
-                                                                <option value="0">Upcoming</option>
+                                                            <select class="form-control" name="edit_running" id="edit_running">
+                                                                <option value="0">Running</option>
+                                                                <option value="1">Upcoming</option>
                                                             </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <div class="form-group">
+                                                            <label>Decription</label>
+                                                            <textarea type="text" name="decription" id="decription"
+                                                                      class="form-control"
+                                                                      value="<?php echo $row['description']; ?>"><?php echo $row['description']; ?></textarea>
                                                         </div>
                                                     </div>
                                                     <div class="col-12">
                                                         <div class="form-group">
                                                             <label>Images</label>
                                                             <br>
-                                                            <img src="../../uploads/<?php echo $row['image']; ?>" width="10%">
-                                                            <input type="file" name="edit-movie-image" id="edit-movie-image"
+                                                            <img src="image/<?php echo $row['image']; ?>" width="10%">
+                                                            <input type="file" name="edit_img" id="edit_img"
                                                                    class="form-control">
                                                             <input type="hidden" name="old_image"
                                                                    value="<?php echo $row['image']; ?>" id="old_image"
                                                                    class="form-control">
                                                         </div>
                                                     </div>
-                                                    <input type="hidden" name="edit-movie-id" value="<?php echo $row['id']; ?>">
+                                                    <input type="hidden" name="add_product" value="1">
                                                     <div class="col-12">
 
-                                                        <input type="submit" name="edit-movie-btn" id="edit-movie-btn"
+                                                        <input type="submit" name="updatemovie" id="updatemovie"
                                                                value="update" class="btn btn-primary">
                                                     </div>
                                                 </div>
@@ -237,10 +234,10 @@
                                             </button>
                                         </div>
                                         <div class="modal-body">
-                                            <form id="insert_movie" action="exec/movies.php" method="post">
+                                            <form id="insert_movie" action="insert_data.php" method="post">
                                                 <h4> Yor Sour This id "<?php echo $row['id']; ?>" is delete.</h4>
-                                                <input type="hidden" name="delete-movie-id" value="<?php echo $row['id']; ?>">
-                                                <input type="submit" name="delete-movie-btn" id="delete-movie-btn" value="OK"
+                                                <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
+                                                <input type="submit" name="deletemovie" id="deletemovie" value="OK"
                                                        class="btn btn-primary">
                                             </form>
                                         </div>
@@ -275,27 +272,27 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form name="" id="insert_movie" action="exec/movies.php" method="post"
+                    <form name="" id="insert_movie" action="insert_data.php" method="post"
                           enctype="multipart/form-data" onsubmit="">
                         <div class="row">
                             <div class="col-12">
                                 <div class="form-group">
                                     <label>Title</label>
-                                    <input class="form-control" name="movie-title" id="movie-title"
+                                    <input class="form-control" name="movie_name" id="movie_name"
                                            placeholder="movie name">
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="form-group">
                                     <label>Director</label>
-                                    <input class="form-control" name="movie-director" id="movie-director"
+                                    <input class="form-control" name="director_name" id="director_name"
                                            placeholder="director name">
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="form-group">
                                     <label>Release Date</label>
-                                    <input class="form-control" name="movie-release-date" id="movie-release-date"
+                                    <input class="form-control" name="release_date" id="release_date"
                                            placeholder="director name" type="date">
                                 </div>
                             </div>
@@ -303,7 +300,7 @@
                             <div class="col-12">
                                 <div class="form-group">
                                     <label for="genre">Genre</label>
-                                    <select class="form-control" name="movie-genre-id" id="movie-genre-id">
+                                    <select class="form-control" name="genre" id="genre">
                                         <?php
                                         $query = "SELECT id, genre_name FROM genre";
                                         $result = $conn->query($query);
@@ -318,28 +315,28 @@
                             <div class="col-12">
                                 <div class="form-group">
                                     <label>Language</label>
-                                    <input type="text" name="movie-language" id="movie-language" class="form-control"
+                                    <input type="text" name="language" id="language" class="form-control"
                                            placeholder="Enter Language">
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="form-group">
                                     <label>Trailer Link</label>
-                                    <input type="text" name="movie-trailer-link" id="movie-trailer-link" class="form-control"
-                                           placeholder="Enter Trailer">
+                                    <input type="text" name="tailer" id="tailer" class="form-control"
+                                           placeholder="Enter Tailer">
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="form-group">
                                     <label>Description</label>
-                                    <textarea type="text" name="movie-description" id="movie-description"
+                                    <textarea type="text" name="description" id="description"
                                               class="form-control"></textarea>
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="form-group">
                                     <label>Status</label>
-                                    <select class="form-control" name="movie-status" id="movie-status">
+                                    <select class="form-control" name="action" id="action">
                                         <option value="1">Active</option>
                                         <option value="0">Inactive</option>
                                     </select>
@@ -348,7 +345,7 @@
                             <div class="col-12">
                                 <div class="form-group">
                                     <label>Running</label>
-                                    <select class="form-control" name="movie-running" id="movie-running">
+                                    <select class="form-control" name="action" id="action">
                                          <option value="0">Running</option>
                                         <option value="1">Upcoming</option>
                                     </select>
@@ -357,12 +354,13 @@
                             <div class="col-12">
                                 <div class="form-group">
                                     <label>Upload Image</label>
-                                    <input type="file" name="movie-image" id="movie-image" value="img" class="form-control">
+                                    <input type="file" name="img" value="img" id="img" class="form-control">
                                 </div>
                             </div>
+                            <input type="hidden" name="add_product" value="1">
                             <div class="col-12">
 
-                                <input type="submit" name="add-movie-btn" id="add-movie-btn" class="btn btn-primary">
+                                <input type="submit" name="submit" id="submit" value="submit" class="btn btn-primary">
                             </div>
                         </div>
                     </form>

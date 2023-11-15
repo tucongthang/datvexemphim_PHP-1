@@ -26,8 +26,8 @@
                     <h2>Vé</h2>
                 </div>
                 <div class="col-2">
-                    <button data-toggle="modal" data-target="#add_booking_modal" class="btn btn-primary btn-sm">
-                        Booking
+                    <button data-toggle="modal" data-target="#add_custemer_modal" class="btn btn-primary btn-sm">Thêm
+                        vé
                     </button>
                 </div>
             </div>
@@ -89,35 +89,7 @@
                                 <td><?php echo $row['total_seats']; ?></td>
                                 <td><?php echo $row['booking_date']; ?></td>
                                 <td><?php echo $row['total_price']; ?></td>
-                                <td>
-                                    <button data-toggle="modal" data-target="#delete_booking<?php echo $row['id']; ?>"
-                                            class="btn btn-danger btn-sm">Delete Booking
-                                    </button>
-                                </td>
                             </tr>
-
-                            <div class="modal fade" id="delete_booking<?php echo $row['id']; ?>" tabindex="-1"
-                                 role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Delete Bookings</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <form id="insert_movie" action="exec/bookings.php" method="post">
-                                                <h4> Xóa "<?php echo $row['id']; ?>" ? </h4>
-                                                <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
-                                                <input type="submit" name="delete-booking-btn" id="delete-booking-btn" value="OK"
-                                                       class="btn btn-primary">
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
                             <?php
                         }
                     } else {
@@ -132,7 +104,8 @@
     </div>
 
 
-    <div class="modal fade" id="add_booking_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    <!-- Add custemers Modal start -->
+    <div class="modal fade" id="add_custemer_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
          aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -143,13 +116,13 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form name="myform" id="insert_movie" action="exec/bookings.php" method="post"
+                    <form name="myform" id="insert_movie" action="insert_data.php" method="post"
                           enctype="multipart/form-data" onsubmit="return validateform()">
                         <div class="row">
 
                             <div class="col-12">
                                 <label>Username Id</label>
-                                <select class="form-control category_list" name="user-id">
+                                <select class="form-control category_list" name="username_id">
                                     <option value="">Select Username</option>
                                     <?php
                                     $result = mysqli_query($conn, "SELECT * FROM users");
@@ -165,17 +138,19 @@
                             </div>
                             <div class="col-12">
                                 <div class="form-group">
-                                    <label>Showtime ID</label>
-                                    <select class="form-control category_list" name="showtime-id" id="showtime-select">
-                                        <option>Select Showtime ID</option>
-                                        <?php
-                                        $resultShowtimes = mysqli_query($conn, "SELECT id FROM showtimes");
+                                    <label>Movie</label>
 
-                                        if (mysqli_num_rows($resultShowtimes) > 0) {
-                                            while ($rowShowtimes = mysqli_fetch_array($resultShowtimes)) {
-                                                ?>
-                                                <option value="<?php echo $rowShowtimes['id']; ?>"><?php echo $rowShowtimes['id']; ?></option>
-                                                <?php
+                                    <select class="form-control category_list" name="movie">
+                                        <option>Select Username</option>
+                                        <?php
+                                        $result = mysqli_query($conn, "SELECT * FROM movies");
+                                        if (mysqli_num_rows($result) > 0) {
+                                            while ($row = mysqli_fetch_array($result)) {
+                                                if ($row['running'] == "1") {
+                                                    ?>
+                                                    <option value="<?php echo $row['id']; ?>"><?php echo $row['title']; ?></option>
+                                                    <?php
+                                                }
                                             }
                                         }
                                         ?>
@@ -184,25 +159,31 @@
                             </div>
                             <div class="col-12">
                                 <div class="form-group">
-                                    <label>Seats</label>
-                                    <input type="text" name="booking-seats" class="form-control" placeholder="Enter Seats">
+                                    <label>Show Time</label>
+                                    <input type="text" name="show_time" class="form-control" placeholder="Enter Show">
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="form-group">
-                                    <label>Total Seats</label>
-                                    <input type="number" name="booking-total-seats" class="form-control" id="total-seat"
+                                    <label>Seats</label>
+                                    <input type="text" name="seat" class="form-control" placeholder="Enter Seats">
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label>Total Seat</label>
+                                    <input type="number" name="totalseat" class="form-control"
                                            placeholder="Enter Total Seat">
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="form-group">
                                     <label>Price</label>
-                                    <input type="number" id="price" name="booking-total-price" class="form-control" placeholder="Enter Price">
+                                    <input type="text" name="price" class="form-control" placeholder="Enter Price">
                                 </div>
                             </div>
                             <div class="col-12">
-                                <input type="submit" name="add-booking-btn" class="btn btn-primary add-product"
+                                <input type="submit" name="customers" class="btn btn-primary add-product"
                                        value="Add Product">
                             </div>
                         </div>
@@ -213,9 +194,10 @@
             </div>
         </div>
     </div>
-
-    <script src="./js/bookings.js"></script>
-
+    <!-- Add custemers- Modal end -->
     <?php include_once("./templates/footer.php"); ?>
 
 
+    <script>
+
+    </script>

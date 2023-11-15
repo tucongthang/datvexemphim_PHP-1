@@ -29,8 +29,6 @@ $row = mysqli_fetch_array($result);
     <link rel="stylesheet" href="assets/css/slicknav.min.css" type="  text/css">
     <!--    <link rel="stylesheet" href="assets/css/fonts-googleapis.css" type="  text/css">-->
     <link rel="stylesheet" href="assets/css/style.css" type="text/css">
-    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 
     <style>
 
@@ -144,24 +142,58 @@ $id = $row['id'];
 
         <div class="row feature design">
 
-            <div class="col-lg-4"><img src="admin/image/<?php echo $row['image']; ?>" class="resize-detail"
+            <div class="col-lg-5"><img src="admin/image/<?php echo $row['image']; ?>" class="resize-detail"
                                        alt="" width="100%"></div>
-            <div class="col-lg-5">
-                
-                <div>
-                    <h2 class="mt-5"><?php echo $row['title']; ?></h2>
+            <div class="col-lg-7">
 
-                    <div class="mb-4">
-                        <ion-icon class="text-warning" name="calendar-outline"> </ion-icon> <?php echo $row['release_date']; ?>
-                    </div>
+                <table class="content-table">
+                    <thead>
+                    <tr>
+                        <th colspan="2">Movie Details</th>
+                    </tr>
+                    </thead>
 
-                    <div class="mb-4">
-                        <h4>Giám đốc: <?php echo $row['director']; ?></h4>
-                    </div>
+                    <tbody>
+                    <tr>
+                        <td>Movie Name</td>
+                        <td><?php echo $row['title']; ?></td>
+                    </tr>
+                    <tr>
+                        <td>Release Date</td>
+                        <td><?php echo $row['release_date']; ?></td>
+                    </tr>
+                    <tr>
+                        <td>Director Name</td>
+                        <td><?php echo $row['director']; ?></td>
+                    </tr>
+                    <tr>
+                        <td>Genre</td>
+                        <td><?php echo $row['genre_name']; ?></td>
+                    </tr>
+                    <tr>
+                        <td>Language</td>
+                        <td><?php echo $row['language']; ?></td>
+                    </tr>
 
-                    <div class="mb-4">
-                        <h4>Thể loại: <?php echo $row['genre_name']; ?></h4>
-                    </div>
+                    <tr>
+                        <td>Tailer</td>
+                        <td><a data-toggle="modal" data-target="#tailer_modal<?php echo $row['id']; ?>">Veiw
+                                Tailer</a></td>
+                        <div class="modal fade" id="tailer_modal<?php echo $row['id']; ?>" tabindex="-1"
+                             role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <embed style="width: 820px; height: 450px;"
+                                           src="<?php echo $row['you_tube_link']; ?>"></embed>
+                                </div>
+                            </div>
+                        </div>
+                    </tr>
+
+                    </tbody>
+
+
+                </table>
 
                     <div class="mb-4">
                         <h4>Ngôn ngữ: <?php echo $row['language']; ?></h4>
@@ -207,6 +239,7 @@ $id = $row['id'];
                     ?>
                 </div>
             </div>
+
         </div>
 
         <div class="row">
@@ -214,8 +247,8 @@ $id = $row['id'];
                 <div class="col-md-12">
 
                     <div class="row">
-                        <div class="col-md-12 pb-2 mb-4 text-black border-bottom border-danger">
-                            <h4>Lịch chiếu</h4>
+                        <div class="col-md-12">
+                            <h4>Show Book Ticket:</h4><br>
                         </div>
                     </div>
                     <div class="row">
