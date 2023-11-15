@@ -77,6 +77,11 @@
                                 <td><?php echo $row['release_date']; ?></td>
                                 <td><?php echo $row['genre_name']; ?></td>
                                 <td><?php echo $row['language']; ?></td>
+                                <!-- lại tới ngài dũng sửa css nữa đ m, 
+
+
+                            -->
+                                <!-- coi cách nào set width cho thằng trailer_link này ngắn lại, overflow thì ẩn bớt đi, kiểu đang c..... -->
                                 <td><?php echo $row['trailer_link']; ?></td>
                                 <td><?php echo $row['description']; ?></td>
                                 <td><img src="../uploads/<?php echo $row['image']; ?>" alt="" class="resize"></td>

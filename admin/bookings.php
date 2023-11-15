@@ -23,7 +23,7 @@
 
             <div class="row">
                 <div class="col-10">
-                    <h2>Vé</h2>
+                    <h2>Booking</h2>
                 </div>
                 <div class="col-2">
                     <button data-toggle="modal" data-target="#add_booking_modal" class="btn btn-primary btn-sm">
@@ -32,8 +32,8 @@
                 </div>
             </div>
 
-            <?php
-            include_once("templates/error.php");
+            <?php 
+                include_once ('templates/error.php');
             ?>
 
             <div class="table-responsive">
@@ -141,7 +141,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Add Movie</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Add Booking</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -189,25 +189,25 @@
                             <div class="col-12">
                                 <div class="form-group">
                                     <label>Seats</label>
-                                    <input type="text" name="booking-seats" class="form-control" placeholder="Enter Seats">
+                                    <input type="text" name="booking-seats" class="form-control" placeholder="Enter Seats" required>
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="form-group">
                                     <label>Total Seats</label>
                                     <input type="number" name="booking-total-seats" class="form-control" id="total-seat"
-                                           placeholder="Enter Total Seat">
+                                           placeholder="Enter Total Seat" required>
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="form-group">
                                     <label>Price</label>
-                                    <input type="number" id="price" name="booking-total-price" class="form-control" placeholder="Enter Price">
+                                    <input type="number" id="price" name="booking-total-price" class="form-control" placeholder="Enter Price" required>
                                 </div>
                             </div>
                             <div class="col-12">
                                 <input type="submit" name="add-booking-btn" class="btn btn-primary add-product"
-                                       value="Add Product">
+                                       value="Booking">
                             </div>
                         </div>
 
