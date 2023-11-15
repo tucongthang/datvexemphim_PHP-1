@@ -22,7 +22,7 @@
 
             <div class="row">
                 <div class="col-10">
-                    <h2>Feedback</h2>
+                    <h2>Showtime</h2>
                 </div>
                 <div class="col-2">
                     <button type="button" data-toggle="modal" data-target="#add_showtimes"
@@ -276,7 +276,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Add Product</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Add Showtime</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -360,7 +360,7 @@
                                 <label>Price</label>
                                 <input type="number" class="form-control" name="edit-theater-address"
                                        id="edit-theater-address"
-                                       placeholder="Enter Price" value="<?php echo $row['price']; ?>">
+                                       placeholder="Enter Price" value="<?php echo $row['price']; ?>" required>
                             </div>
                         </div>
 
@@ -368,8 +368,7 @@
                         <input type="hidden" name="add_product" value="1">
                         <div class="col-12">
 
-                            <input type="submit" name="add-showtime-btn" id="add-showtime-btn" value="submit"
-                                   class="btn btn-primary">
+                            <input type="submit" name="addshow" id="addshow" value="Add Showtime" class="btn btn-primary">
                         </div>
 
 

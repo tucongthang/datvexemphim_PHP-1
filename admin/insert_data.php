@@ -208,7 +208,7 @@ if (isset($_POST['add_user'])) {
     echo $response;
 
 
-    $insert_record = mysqli_query($conn, "INSERT INTO user (`username`,`email`,`mobile`,`city`,`password`,`image`)VALUES('" . $username . "','" . $email . "','" . $mobile . "','" . $city . "','" . $password . "','" . $filename . "')");
+    $insert_record = mysqli_query($conn, "INSERT INTO users (`username`,`email`,`phone`,`birthday`,`password`,`image`)VALUES('" . $username . "','" . $email . "','" . $mobile . "','" . $city . "','" . $password . "','" . $filename . "')");
     if (!$insert_record) {
         echo "hii";
     } else {
@@ -266,7 +266,7 @@ if (isset($_POST['updateusers'])) {
 if (isset($_POST['deleteuser'])) {
     $id = mysqli_real_escape_string($conn, $_POST['id']);
 
-    $sql = mysqli_query($conn, "DELETE FROM user WHERE id=$id");
+    $sql = mysqli_query($conn, "DELETE FROM users WHERE id=$id");
     echo "<script> window.location.href='users.php' </script>";
 
 
