@@ -10,37 +10,28 @@
 <body>
 
 <?php
-require_once('../config/db_connect.php');
-session_start();
+    require_once('../config/db_connect.php');
+    session_start();
 
-if (isset($_POST['username']) || isset($_POST['password'])) {
-    $uname = mysqli_real_escape_string($conn, $_POST['username']);
-    $password = mysqli_real_escape_string($conn, $_POST['password']);
+    if(isset($_POST['username']) || isset($_POST['password']) ) {
+        $uname = mysqli_real_escape_string($conn, $_POST['username']);
+        $password = mysqli_real_escape_string($conn, $_POST['password']);
 
-    try {
+
+
         $password_query = "SELECT password FROM admin WHERE username='" . $uname . "'";
         $result = mysqli_query($conn, $password_query);
+        $row = mysqli_fetch_array($result);
+        $password_verify = $row['password'];
 
-        if (mysqli_num_rows($result) > 0) {
-            $row = mysqli_fetch_array($result);
-
-            $password_verify = $row['password'];
-
-            if (!empty($password_verify)) {
-                if (password_verify($password, $password_verify)) {
-                    $_SESSION['admin'] = $uname;
-                    header("Location: index.php");
-                } else {
-                    throw new Exception("Verify unsuccessful");
-                }
-            }
+        if (password_verify($password, $password_verify)) {
+                $_SESSION['admin'] = $uname;
+                header("Location: index.php");
         } else {
-            $msg = "Username or password in incorrect";
+            $msg = "Invalid Username or password.";
+            exit();
         }
-    } catch (Exception $e) {
-        $msg = "An error occurred: " . $e->getMessage();
     }
-}
 
 ?>
 <div>
@@ -73,7 +64,7 @@ if (isset($_POST['username']) || isset($_POST['password'])) {
                                 <tr>
                                     <td><input type="password" class="inputbox" id="password" name="password" required/>
                                         <br>
-                                        <p id="msg"><?php if (isset($msg)) echo $msg; ?></p>
+                                        <p id="msg"><?php if(isset($msg)) echo $msg; ?></p>
                                     </td>
 
                                 </tr>
