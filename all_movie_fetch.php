@@ -39,7 +39,7 @@ if (isset($_POST["action"])) {
                 $output .= '
 			<div class="col-lg-4 col-md-5 col-sm-6">
 				<div style="border:1px solid #ccc; border-radius:5px; padding:16px; margin-bottom:1px; height:450px;">
-					<img src="admin/image/' . $row['image'] . '" alt="" class="resize" style="height:200px;" >
+					<img src="uploads/' . $row['image'] . '" alt="" class="resize" style="height:200px;" >
 					<p align="center"><strong><h4>' . $row['title'] . '</h4></strong></p>
 					
 					director : ' . $row['director'] . ' <br />
@@ -57,7 +57,7 @@ if (isset($_POST["action"])) {
                 $output .= '
 			<div class="col-lg-4 col-md-5 col-sm-6">
 				<div style="border:1px solid #ccc; border-radius:5px; padding:16px; margin-bottom:1px; height:450px;">
-					<img src="admin/image/' . $row['image'] . '" alt="" class="resize" style="height:200px;" >
+					<img src="uploads/' . $row['image'] . '" alt="" class="resize" style="height:200px;" >
 					<p align="center"><strong><h4>' . $row['title'] . '</h4></strong></p>
 					
 					director : ' . $row['director'] . ' <br />
