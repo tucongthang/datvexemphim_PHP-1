@@ -262,7 +262,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Enter Details</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Enter User</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -274,19 +274,19 @@
                             <div class="col-12">
                                 <div class="form-group">
                                     <label>Username</label>
-                                    <input class="form-control" name="username" id="username" placeholder="user name">
+                                    <input class="form-control" name="username" id="username" placeholder="User Name" required>
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="form-group">
                                     <label>Name</label>
-                                    <input class="form-control" name="name" id="name" placeholder="user name">
+                                    <input class="form-control" name="name" id="name" placeholder="User Name" required>
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="form-group">
                                     <label> Email</label>
-                                    <input class="form-control" name="email" id="email" placeholder=" Enter Email">
+                                    <input class="form-control" name="email" id="email" placeholder=" Enter Email" required>
                                 </div>
                             </div>
                             <div class="col-12">
@@ -312,7 +312,7 @@
                                 <div class="form-group">
                                     <label>Phone</label>
                                     <input type="number" class="form-control" name="phone" id="phone"
-                                           placeholder="Mobile no">
+                                           placeholder="Mobile phone" required>
                                 </div>
                             </div>
                             <div class="col-12">
@@ -326,7 +326,7 @@
                                 <div class="form-group">
                                     <label>Password</label>
                                     <input type="text" name="password" id="Password" class="form-control"
-                                           placeholder="Enter Password">
+                                           placeholder="Enter Password" required>
                                 </div>
                             </div>
                             <div class="col-12">
