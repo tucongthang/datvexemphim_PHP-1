@@ -41,15 +41,15 @@
                     <thead>
                     <tr>
                         <th>Id</th>
-                        <th>Tên khách hàng</th>
-                        <th>Tên phim</th>
+                        <th>Customer name</th>
+                        <th>Movie</th>
                         <th>Theater</th>
                         <th>Screen</th>
-                        <th>Giờ chiếu</th>
-                        <th>Ghế</th>
-                        <th>Tổng ghế</th>
-                        <th>Ngày đặt</th>
-                        <th>Tổng tiền</th>
+                        <th>Screening time</th>
+                        <th>Seats</th>
+                        <th>Overall chair</th>
+                        <th>Date</th>
+                        <th>Total</th>
                     </tr>
                     </thead>
                     <tbody id="customer_list">
@@ -112,7 +112,7 @@
                                         </div>
                                         <div class="modal-body">
                                             <form id="insert_movie" action="exec/bookings.php" method="post">
-                                                <h4> Xóa "<?php echo $row['id']; ?>" ? </h4>
+                                                <h4> Are you sure want to delete  "<?php echo $row['id']; ?>" ? </h4>
                                                 <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
                                                 <input type="submit" name="delete-booking-btn" id="delete-booking-btn" value="OK"
                                                        class="btn btn-primary">

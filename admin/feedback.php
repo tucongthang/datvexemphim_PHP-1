@@ -75,7 +75,7 @@
                                         </div>
                                         <div class="modal-body">
                                             <form id="delete-feedback" action="exec/feedback.php" method="post">
-                                                <h4> Yor Sour This id "<?php echo $row['id']; ?>" is delete.</h4>
+                                                <h4> Are you sure want to delete this ID "<?php echo $row['id']; ?>" ?</h4>
                                                 <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
                                                 <input type="submit" name="delete-feedback" id="delete-feedback"
                                                        value="OK" class="btn btn-primary">
