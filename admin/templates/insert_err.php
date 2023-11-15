@@ -1,5 +1,4 @@
-<?php
-    if ($insert_record) {
+ if ($insert_record) {
         $msg = "Insert successful";
         $error = 0;
     } else {

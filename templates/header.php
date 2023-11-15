@@ -50,12 +50,12 @@
                                         }
                                     }
                                     ?>
-                                    <span><?php echo $_SESSION['username']; ?></span>
+                                    <span class="font-weight-bold"><?php echo $_SESSION['username']; ?></span>
                                 </button>
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <li><a class="dropdown-item" href="user_info.php">Account</a></li>
-                                    <li><a class="dropdown-item" href="history_booking.php">History Booking</a></li>
-                                    <li><a class="dropdown-item" href="logout.php">Logout</a></li>
+                                    <li><a class="dropdown-item" href="user_info.php"><i class="fa fa-user"></i> Account</a></li>
+                                    <li><a class="dropdown-item" href="booking_history.php"><i class="fa fa-ticket"></i> History Booking</a></li>
+                                    <li><a class="dropdown-item" href="logout.php"><i class="fa fa-sign-out"></i> Logout</a></li>
                                 </ul>
                             </div>
                         </div>

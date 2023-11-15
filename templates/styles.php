@@ -22,4 +22,8 @@
         padding: 0 .75rem;
     }
 
+    .object-fit-cover {
+        object-fit: cover;
+    }
+
 </style>

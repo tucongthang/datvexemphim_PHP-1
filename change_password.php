@@ -1,6 +1,8 @@
 <?php
 session_start();
 
+require_once('config/db_connect.php');
+
 if (!isset($_SESSION['username']) && !isset($_SESSION['user_id'])) {
     header("Location: index.php");
     exit();

@@ -119,35 +119,35 @@ include("templates/header.php");
                 <div class="col-12">
                     <div class="card border-0 shadow-lg mb-4 rounded-0">
                         <div class="card-body">
-                            <form action="update_user_info.php" method="post">
+                            <form action="update_user_info.php" method="post" id="updateForm">
                                 <div class="row mb-3">
                                     <div class="col-md-6">
                                         <label for="name">Họ và tên:</label>
                                         <input type="text" class="form-control" id="name" name="name"
-                                               value="<?php if (isset($user)) echo $user['name']; ?>">
+                                               value="<?php if (isset($user)) echo $user['name']; ?>" required>
                                     </div>
                                     <div class="col-md-6">
                                         <label for="birthday">Ngày sinh:</label>
                                         <input type="date" class="form-control" id="birthday" name="birthday"
-                                               value="<?php if (isset($user)) echo $user['birthday']; ?>">
+                                               value="<?php if (isset($user)) echo $user['birthday']; ?>" required>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
                                     <div class="col-md-6">
                                         <label for="email">Email:</label>
                                         <input type="email" class="form-control" id="email" name="email"
-                                               value="<?php if (isset($user)) echo $user['email']; ?>">
+                                               value="<?php if (isset($user)) echo $user['email']; ?>" required>
                                     </div>
                                     <div class="col-md-6">
                                         <label for="phone">Số điện thoại:</label>
                                         <input type="tel" class="form-control" id="phone" name="phone"
-                                               value="<?php if (isset($user)) echo $user['phone']; ?>">
+                                               value="<?php if (isset($user)) echo $user['phone']; ?>" required>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
                                     <div class="col-md-6">
                                         <label>Gender:</label>
-                                        <div class="form-group">
+                                        <div class="form-group my-1">
                                             <div class="form-check form-check-inline">
                                                 <input class="form-check-input" type="radio" name="gender" id="male"
                                                        value="Male" <?php if (isset($user)) echo ($user['gender'] == 0) ? 'checked' : ''; ?>>
@@ -175,7 +175,7 @@ include("templates/header.php");
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <button type="submit" class="btn btn-primary float-right">Cập nhật</button>
+                                        <button type="button" class="btn btn-primary float-right" id="updateBtn">Cập nhật</button>
                                     </div>
                                 </div>
                             </form>
@@ -186,6 +186,7 @@ include("templates/header.php");
         </div>
     </div>
 </div>
+
 
 <!-- Change Password Modal -->
 <div class="modal fade" id="changePasswordModal" tabindex="-1" role="dialog" aria-labelledby="changePasswordModalLabel"
@@ -198,18 +199,36 @@ include("templates/header.php");
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
-                <label for="newPassword">Mật khẩu mới:</label>
-                <input type="password" class="form-control" id="newPassword" name="newPassword">
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                <button type="button" class="btn btn-primary">Lưu thay đổi</button>
-            </div>
+            <form action="change_password.php" method="post">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="currentPassword">Mật khẩu cũ:</label>
+                        <input type="password" class="form-control" id="currentPassword" name="currentPassword" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="newPassword">Mật khẩu mới:</label>
+                        <input type="password" class="form-control" id="newPassword" name="newPassword" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                    <button type="submit" class="btn btn-primary" style="margin-top: .25rem;">Lưu thay đổi</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
 
+<script>
+    document.getElementById('updateBtn').addEventListener('click', function() {
+        let confirmUpdate = confirm("Bạn có chắc chắn muốn cập nhật thông tin?");
+
+        if (confirmUpdate) {
+            document.getElementById('updateForm').submit();
+        }
+    });
+
+</script>
 
 <?php
 include("templates/footer.php");

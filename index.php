@@ -120,7 +120,7 @@ include("templates/header.php");
 
                     <div class="col-lg-3 col-md-3 col-sm-6">
                         <div class="image-container">
-                            <img src="uploads/<?php echo $row['image']; ?>" alt="" class="img-fluid image-resize2">
+                            <img src="uploads/<?php echo $row['image']; ?>" alt="" class="w-100 img-fluid image-resize2">
                             <div class="overlay">
                                 <div class="overlay-buttons">
                                     <div class="col">
@@ -177,9 +177,8 @@ include("templates/header.php");
                     ?>
                     <div class="image-box">
                         <div class="col-lg-2 col-md-3 col-sm-6">
-
                             <div class="card" style="width: 12rem;">
-                                <img class="card-img-top image-resize4" src="uploads/<?php echo $row['image']; ?> "
+                                <img class="card-img-top image-resize4 w-100" src="uploads/<?php echo $row['image']; ?> "
                                      alt="Card image cap">
 
                                 <div class="card-body">

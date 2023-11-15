@@ -19,44 +19,44 @@
             </a>
           </li>
             <li class="nav-item">
-                <a class="nav-link" href="Theaters.php">
-                    <span data-feather="users"></span>
+                <a class="nav-link" href="theaters.php">
+                    <span data-feather="video"></span>
                     Theaters
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="Screens.php">
-                    <span data-feather="users"></span>
+                <a class="nav-link" href="screens.php">
+                    <span data-feather="monitor"></span>
                     Screens
                 </a>
             </li>
          <li class="nav-item">
-            <a class="nav-link" href="Movies.php">
-              <span data-feather="users"></span>
+            <a class="nav-link" href="movies.php">
+              <span data-feather="film"></span>
               Movies
             </a>
           </li>
          <li class="nav-item">
-            <a class="nav-link" href="Showtimes.php">
-              <span data-feather="users"></span>
+            <a class="nav-link" href="showtimes.php">
+              <span data-feather="aperture"></span>
               Showtimes
             </a>
           </li>
           
           <li class="nav-item">
-            <a class="nav-link" href="Bookings.php">
-              <span data-feather="users"></span>
+            <a class="nav-link" href="bookings.php">
+              <span data-feather="credit-card"></span>
               Bookings
             </a>
           </li>
            <li class="nav-item">
-            <a class="nav-link" href="Feedback.php">
-              <span data-feather="users"></span>
+            <a class="nav-link" href="feedback.php">
+              <span data-feather="rss"></span>
               Feedback
             </a>
           </li>
            <li class="nav-item">
-            <a class="nav-link" href="Users.php">
+            <a class="nav-link" href="users.php">
               <span data-feather="users"></span>
               Users
             </a>

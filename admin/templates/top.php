@@ -4,8 +4,8 @@
     
 
 <link rel="stylesheet" href="./css/bootstrap.min.css" crossorigin="anonymous">
-
-<link rel="stylesheet" href="./css/all.css" crossorigin="anonymous">
+<link rel="stylesheet" href="./css/font-awesome.min.css" type="text/css">
+<!--<link rel="stylesheet" href="./css/all.css" crossorigin="anonymous">-->
 
 
     <style>

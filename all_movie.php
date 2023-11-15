@@ -21,92 +21,83 @@ require_once('config/db_connect.php');
 
     <style>
 
+        .container h2 {
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #222;
+            font-size: 30px;
+        }
+
         .part-line {
-            margin: 10px 0;
+            border-bottom: solid 1px #111;
+            margin-bottom: 25px;
+            margin-top: 25px;
         }
 
-        .left {
-            background-color: #B4B4B3;
+        .image-container {
+            position: relative;
         }
 
-        label {
-            font-size: 20px;
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        .checkbox-wrapper-29 {
-            --size: 1rem;
-            --background: #fff;
-            font-size: var(--size);
-        }
-
-        .checkbox-wrapper-29 *,
-        .checkbox-wrapper-29 *::after,
-        .checkbox-wrapper-29 *::before {
-            box-sizing: border-box;
-        }
-
-        .checkbox-wrapper-29 input[type="checkbox"] {
-            visibility: hidden;
+        .overlay-buttons {
+            text-align: center;
             display: none;
         }
 
-        .checkbox-wrapper-29 .checkbox__label {
-            width: var(--size);
+        .image-container:hover .overlay {
+            opacity: 1;
         }
 
-        .checkbox-wrapper-29 .checkbox__label:before {
-            content: ' ';
+        .image-container:hover .overlay-buttons {
             display: block;
-            height: var(--size);
-            width: var(--size);
-            position: absolute;
-            top: calc(var(--size) * 0.125);
-            left: 0;
-            background: var(--background);
         }
 
-        .checkbox-wrapper-29 .checkbox__label:after {
-            content: ' ';
-            display: block;
-            height: var(--size);
-            width: var(--size);
-            border: calc(var(--size) * .14) solid #000;
-            transition: 200ms;
-            position: absolute;
-            top: calc(var(--size));
-            left: calc(var(--size) - var(--size) / 2);
-            background: var(--background);
+        .overlay-buttons a {
+            color: #fff;
+            padding: 10px 20px;
+            margin-right: 10px;
+            text-decoration: none;
+            border: 1px solid #fff;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
         }
 
-        .checkbox-wrapper-29 .checkbox__label:after {
-            transition: 100ms ease-in-out;
+        .overlay-buttons a:hover {
+            background-color: #fff;
+            color: #000;
         }
 
-        .checkbox-wrapper-29 .checkbox__input:checked ~ .checkbox__label:after {
-            border-top-style: none;
-            border-right-style: none;
-            -ms-transform: rotate(-45deg); /* IE9 */
-            transform: rotate(-45deg);
-            height: calc(var(--size) * .5);
-            border-color: green;
+        .image-container h6 {
+            text-align: right;
         }
 
-        .checkbox-wrapper-29 .checkbox {
-            position: relative;
-            display: flex;
-            cursor: pointer;
-            /* Mobile Safari: */
-            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+        .overlay-button {
+            width: 150px;
         }
 
-        .checkbox-wrapper-29 .checkbox__label:after:hover,
-        .checkbox-wrapper-29 .checkbox__label:after:active {
-            border-color: green;
+        .modal-dialog {
+            max-width: 1500px;
+            margin-top: -1rem;
         }
 
-        .checkbox-wrapper-29 .checkbox__label {
-            margin-right: calc(var(--size) * 0.45);
+        .card img {
+            height: 350px;
         }
+
+    </style>
 
     </style>
 
@@ -122,65 +113,75 @@ include("templates/header.php");
     <div class="row">
 
         <div class="col-md-3 left rounded">
+            <div class="card border-1 ml-3 rounded">
+                <div class="list-group px-3 py-1">
+                    <h3 class="part-line">Tìm kiếm</h3>
+                    <div class="input-group mb-3">
+                        <input type="text" name="search" id="search" class="form-control" placeholder="Nhập từ khóa"
+                               aria-label="Search" aria-describedby="search-icon">
+                    </div>
+                </div>
 
-            <div class="list-group">
-                <h3 class="part-line">Tìm kiếm</h3>
-                <input type="text" name="search" id="search" class="form-control search" placeholder="Nhập từ khóa">
-            </div>
 
-            <div class="list-group">
-                <h3 class="part-line">Thể loại</h3>
-                <div class="rounded">
-                    <?php
-                    $query = "
+                <div class="list-group px-3 py-1">
+                    <h3 class="part-line">Thể loại</h3>
+                    <div class="card border-0">
+                        <?php
+                        $query = "
                         SELECT DISTINCT g.genre_name, genre_id
                         FROM movies m
                         JOIN genre g ON m.genre_id = g.id
                         WHERE m.status = '1'
                         ORDER BY g.genre_name DESC;
                     ";
-                    $statement = $conn->query($query);
-                    $result = $statement->fetch_all(MYSQLI_ASSOC);
-                    foreach ($result as $row) {
+                        $statement = $conn->query($query);
+                        $result = $statement->fetch_all(MYSQLI_ASSOC);
+                        foreach ($result as $row) {
+                            ?>
+                            <div class="list-group-item">
+                                <input id="genre_id_<?= $row['genre_id'] ?>" type="checkbox"
+                                       class="common_selector genre checkbox__input"
+                                       value="<?php echo $row['genre_id']; ?>">
+                                <label for="genre_id_<?= $row['genre_id'] ?>" class="ml-2"><span
+                                            class="checkbox__label"></span> <?php echo $row['genre_name']; ?></label>
+                            </div>
+                            <?php
+                        }
                         ?>
-                        <div class="list-group-item checkbox checkbox-wrapper-29">
-                            <label class="ml-2"><input type="checkbox" class="common_selector genre checkbox__input"
-                                                       value="<?php echo $row['genre_id']; ?>"> <span
-                                        class="checkbox__label"></span> <?php echo $row['genre_name']; ?></label>
-                        </div>
-                        <?php
-                    }
-                    ?>
+                    </div>
                 </div>
-            </div>
 
-            <div class="list-group">
-                <h3 class="part-line">Ngôn ngữ</h3>
-                <div class="rounded">
-                    <?php
-                    $query = "
+                <div class="list-group px-3 py-1 mb-3">
+                    <h3 class="part-line">Ngôn ngữ</h3>
+                    <div class="card border-0">
+                        <?php
+                        $query = "
                         SELECT DISTINCT(language) FROM movies WHERE status = '1' ORDER BY language DESC
                         ";
-                    $statement = $conn->query($query);
-                    $result = $statement->fetch_all(MYSQLI_ASSOC);
-                    foreach ($result as $row) {
+                        $statement = $conn->query($query);
+                        $result = $statement->fetch_all(MYSQLI_ASSOC);
+                        foreach ($result as $row) {
+                            $language_id = 1;
+                            ?>
+                            <div class="list-group-item">
+                                <input id="language_<?= $language_id ?>" type="checkbox" class="common_selector language checkbox__input"
+                                       value="<?php echo $row['language']; ?>">
+                                <label for="language_<?= $language_id ?>" class="ml-2"><span
+                                            class="checkbox__label"></span> <?php echo $row['language']; ?></label>
+                            </div>
+                            <?php
+                        }
                         ?>
-                        <div class="list-group-item checkbox checkbox-wrapper-29">
-                            <label class="ml-2"><input type="checkbox" class="common_selector language checkbox__input"
-                                                       value="<?php echo $row['language']; ?>"> <span
-                                        class="checkbox__label"></span> <?php echo $row['language']; ?></label>
-                        </div>
-                        <?php
-                    }
-                    ?>
+                    </div>
                 </div>
             </div>
         </div>
 
         <div class="col-md-9">
-            <br/>
-            <div class="row filter_data">
-
+            <div class="card border-1 ml-3 rounded">
+                <div class="card-body">
+                    <div class="row filter_data"></div>
+                </div>
             </div>
         </div>
     </div>

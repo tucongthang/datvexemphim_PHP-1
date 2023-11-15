@@ -37,35 +37,54 @@ if (isset($_POST["action"])) {
         foreach ($result as $row) {
             if ($row['running'] == 1) {
                 $output .= '
-			<div class="col-lg-4 col-md-5 col-sm-6">
-				<div style="border:1px solid #ccc; border-radius:5px; padding:16px; margin-bottom:1px; height:450px;">
-					<img src="uploads/' . $row['image'] . '" alt="" class="resize" style="height:200px;" >
-					<p align="center"><strong><h4>' . $row['title'] . '</h4></strong></p>
-					
-					director : ' . $row['director'] . ' <br />
-					category : ' . $row['genre_id'] . '<br />
-					Language : ' . $row['language'] . '</p>
-					
-				</div>
-					<a href="movie_details.php?pass=' . $row['id'] . '" class="btn btn-primary" style="margin-left: 40px;margin-top: -80px;">Book Now</a>
-			</div>
+			<div class="col-lg-4 col-md-5 col-sm-6 mb-3">
+                <div class="image-container">
+                    <img src="uploads/' . $row['image'] . '" alt="" class="object-fit-cover w-100 img-fluid image-resize2">
+                    <div class="overlay">
+                        <div class="overlay-buttons">
+                            <div class="col">
+                                <div class="row">
+                                    <a href="movie_details.php?pass=' . $row['id'] . '" class="btn btn-primary mx-auto overlay-button">
+                                        <i class="fa fa-ticket"></i>
+                                        Book Now
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>	
+                </div>
+                <div>
+					Director : ' . $row['director'] . ' <br />
+					Category : ' . $row['genre_id'] . '<br />
+					Language : ' . $row['language'] . '
+                </div>
+            </div>
 			';
-
             }
 
             if ($row['running'] == 0) {
                 $output .= '
-			<div class="col-lg-4 col-md-5 col-sm-6">
-				<div style="border:1px solid #ccc; border-radius:5px; padding:16px; margin-bottom:1px; height:450px;">
-					<img src="uploads/' . $row['image'] . '" alt="" class="resize" style="height:200px;" >
-					<p align="center"><strong><h4>' . $row['title'] . '</h4></strong></p>
-					
+			<div class="col-lg-4 col-md-5 col-sm-6 mb-3">
+				<div class="image-container">
+                    <img src="uploads/' . $row['image'] . '" alt="" class="object-fit-cover w-100 img-fluid image-resize2">
+                    <div class="overlay">
+                        <div class="overlay-buttons">
+                            <div class="col">
+                                <div class="row">
+                                    <a href="movie_details.php?pass=' . $row['id'] . '" class="btn btn-primary mx-auto overlay-button">
+                                        <i class="fa fa-spinner"></i>
+                                        Upcomming
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <div>					
 					director : ' . $row['director'] . ' <br />
 					category : ' . $row['genre_id'] . '<br />
 					Language : ' . $row['language'] . '</p>
 					
 				</div>
-					<a href="movie_details.php?pass=' . $row['id'] . '" class="btn btn-primary" style="margin-left: 40px;margin-top: -80px;">Upcoming</a>
 			</div>
 			';
             }

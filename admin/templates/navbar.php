@@ -8,11 +8,10 @@
     	<?php
     		if (isset($_SESSION['admin'])) {
     			?>
-    				<a class="nav-link" href="../admin/logout.php">Sign out</a>
+    				<a class="btn btn-primary text-white" href="../admin/logout.php"><i class="fa fa-sign-out"></i> Sign out</a>
     			<?php
     		}
     	?>
-      
     </li>
   </ul>
 </nav>
