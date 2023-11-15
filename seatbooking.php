@@ -208,7 +208,7 @@ if (isset($_GET['showtimeId']) && isset($_GET['movieId'])) {
 <!--                    <input type="hidden" name="show" value="--><?php //echo $showtime ?><!--">-->
                 </table>
 
-
+            <!-- check login -->
             <?php
             if (!isset($_SESSION['username'])) {
                 ?>
