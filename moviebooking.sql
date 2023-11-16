@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1:3306
--- Thời gian đã tạo: Th10 15, 2023 lúc 07:41 AM
+-- Thời gian đã tạo: Th10 16, 2023 lúc 04:24 PM
 -- Phiên bản máy phục vụ: 10.4.24-MariaDB
 -- Phiên bản PHP: 8.1.6
 
@@ -64,8 +64,7 @@ CREATE TABLE `booking` (
 
 INSERT INTO `booking` (`id`, `user_id`, `seats`, `total_seats`, `booking_date`, `showtime_id`, `total_price`) VALUES
 (1, 2, 'A3, D4', 2, '2023-11-10', 1, '0.00'),
-(11, 2, 'D3, A4', 10, '2023-11-14', 1, '100.00'),
-(13, 7, 'D3, A4', 10, '2023-11-14', 1, '100.00');
+(11, 2, 'D3, A4', 10, '2023-11-14', 1, '100.00');
 
 -- --------------------------------------------------------
 
@@ -143,7 +142,8 @@ INSERT INTO `movies` (`id`, `title`, `director`, `release_date`, `genre_id`, `la
 (5, 'Black Adam', 'Warner Bros', '2020-10-03', 4, 'English', 'https://www.youtube.com/embed/Fva_W_AF0IM?si=PhwudSNX7azpd_1Y', 'Black Adam was originally depicted as a supervillain and the ancient magical champion predecessor of Captain Marvel, who fought his way to modern times to challenge the hero and his Marvel Family associates.', 'blackadam.jpg', 1, 1),
 (6, 'Spider-Man: No Way Home', 'Jon Watts', '2021-12-17', 6, 'English', 'https://www.youtube.com/embed/JfVOs4VSpmA?si=g7oPJhyfn9g2ZHFt', 'With Spider-Mans identity now revealed, Peter asks Doctor Strange for help. When a spell goes wrong, dangerous foes from other worlds start to appear, forcing Peter to discover what it truly means to be Spider-Man.', 'spiderman.jpg', 1, 1),
 (7, 'Ant-Man and the Wasp: Quantumania', 'Peyton Reed', '2023-05-16', 7, 'English', 'https://www.youtube.com/embed/ZlNFpri-Y40?si=40E7qGgvqqPKTzaJ', 'The movie will see super-hero couple Scott Lang (Paul Rudd) and Hope van Dyne (Evangeline Lilly) reprise their roles as Ant-Man and the Wasp. They are joined by Michael Douglas and Michelle Pfeiffer, who return as Hopes parents, Hank Pym and Janet van Dyne. Kathryn Newton joins the cast as Cassie La', 'nguoikien.jpg', 1, 1),
-(8, 'Aquaman and the Lost Kingdom', 'DC Studios', '2023-12-22', 6, 'English', 'https://www.youtube.com/embed/FV3bqvOHRQo?si=jloFhthFfHm1a9Ek', 'Aquaman and the Lost Kingdom is the much-anticipated sequel to 2018s Aquaman. It will once again be directed by James Wan, but well have to wait just that little bit longer to see it on our screens.', 'aquaman.jpg', 1, 0);
+(8, 'Aquaman and the Lost Kingdom', 'DC Studios', '2023-12-22', 6, 'English', 'https://www.youtube.com/embed/FV3bqvOHRQo?si=jloFhthFfHm1a9Ek', 'Aquaman and the Lost Kingdom is the much-anticipated sequel to 2018s Aquaman. It will once again be directed by James Wan, but well have to wait just that little bit longer to see it on our screens.', 'aquaman.jpg', 1, 0),
+(25, 'test', 'Chien Thang', '2023-11-16', 1, 'Test', 'https://www.youtube.com/embed/qDFAYyMOxuw?si=QjV3r5mkR9ZatIRz', 'des', '2GrF07.jpeg', 0, 1);
 
 -- --------------------------------------------------------
 
@@ -152,9 +152,9 @@ INSERT INTO `movies` (`id`, `title`, `director`, `release_date`, `genre_id`, `la
 --
 
 CREATE TABLE `screens` (
-  `id` int(11) NOT NULL,
-  `theater_id` int(11) DEFAULT 0,
-  `screen_name` int(11) DEFAULT 0
+  `id` tinyint(4) NOT NULL,
+  `theater_id` tinyint(4) NOT NULL DEFAULT 0,
+  `screen_name` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
 --
@@ -162,11 +162,10 @@ CREATE TABLE `screens` (
 --
 
 INSERT INTO `screens` (`id`, `theater_id`, `screen_name`) VALUES
-(1, 1, 1),
-(2, 1, 2),
-(7, 1, 3),
-(6, 1, 4),
-(17, 1, 5);
+(1, 1, '2D Phụ Đề'),
+(2, 1, '3D Phụ Đề'),
+(3, 2, '2D Phụ Đề'),
+(4, 2, '3D Phụ Đề');
 
 -- --------------------------------------------------------
 
@@ -191,7 +190,12 @@ INSERT INTO `showtimes` (`id`, `movie_id`, `theater_id`, `screen_id`, `showtime`
 (1, 9, 1, 1, '2023-11-15 15:36:00', '10.00'),
 (3, 9, 1, 1, '2023-11-10 17:21:00', '0.00'),
 (5, 21, 1, 1, '2023-11-15 23:34:00', '0.00'),
-(7, 9, 1, 1, '2023-11-16 00:21:00', '0.00');
+(7, 9, 1, 1, '2023-11-16 00:21:00', '0.00'),
+(8, 1, 1, 1, '2023-11-17 15:14:00', '0.00'),
+(9, 1, 1, 2, '2023-11-17 20:56:00', '0.00'),
+(10, 1, 2, 3, '2023-11-17 21:00:00', '0.00'),
+(11, 2, 1, 1, '2023-11-16 23:00:00', '0.00'),
+(12, 1, 1, 1, '2023-11-17 20:15:00', '0.00');
 
 -- --------------------------------------------------------
 
@@ -200,7 +204,7 @@ INSERT INTO `showtimes` (`id`, `movie_id`, `theater_id`, `screen_id`, `showtime`
 --
 
 CREATE TABLE `theaters` (
-  `id` int(11) NOT NULL,
+  `id` tinyint(4) NOT NULL,
   `theater_name` varchar(50) DEFAULT NULL,
   `theater_address` varchar(100) DEFAULT NULL,
   `theater_phone` varchar(15) DEFAULT NULL
@@ -217,7 +221,7 @@ INSERT INTO `theaters` (`id`, `theater_name`, `theater_address`, `theater_phone`
 (11, 'AZIR 8D', 'test', '10248129840'),
 (12, 'AZIR 9D', 'test', '10248129840'),
 (13, 'AZIR 9D', 'test', '10248129840'),
-(15, 'AZIR 11D', 'Test2', '0931322323');
+(15, 'AZIR 11D', 'Test2', '09313223234');
 
 -- --------------------------------------------------------
 
@@ -242,9 +246,10 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `name`, `email`, `password`, `phone`, `birthday`, `image`, `gender`) VALUES
-(2, 'testuser', 'Test', 'testuser@gmail.com', '$2y$10$TX1iiEctUEHXeZvpxXjeieKZWineWiK81VqodvXmVKxHDpZ8DvePa', '0929322222', '2023-11-16', '64349336_422464855151892_7422161348181622784_n.jpg', b'1'),
-(7, 'tindan', 'Jin Pham', 'tindan@gmail.com', '$2y$10$tnG7n.Tl8/YWtF4WH9qwbu6l5.N1bQx5ApcucfFlaYVSsBHku2ypC', '02931322322', '2023-11-09', '391757454_718135037010319_7638684070599160427_n.jpg', b'1'),
-(10, 'tindan2', 'tindan', 'tindan@gmail.com', '$2y$10$Yu8Syazb9/WY0HK70WOi0u6p5IFQhmLn/N6Qw7EFi4YrvFN8YP0S6', '02931322322', '2023-11-15', '118914956_1313702765640982_9209319587640248673_n.jpg', b'1');
+(2, 'testuser', 'test', 'test@gmail.com', '$2y$10$EeJj.5IbcZmlrR2Q7iqCeOrNZFibuj1ElNuRGVI7dEwilkDQvdQn6', '1293132232', '2023-11-16', 'avatar-uid-2.jpg', b'1'),
+(16, 'testuser3', 'Jin Pham', 'user@demo.com', '$2y$10$YH5hyQiGt6nfrd18SHNvQeYrF3jkJl1yv/qVu5asvhHH5P7pc4Qc6', '0929322222', '2023-11-17', 'avatar-uid-16.jpg', b'0'),
+(17, 'testuser6', 'Test Admin', 'test@gmail.com', '$2y$10$DqIMEqyK0Frs8RFEer9Zqe/VJsSXzbsxp4bXp.I/DXnyB6.S4A1Km', '0928282828', '2023-11-17', 'avatar-uid-17.jpg', b'0'),
+(18, 'testuser7', 'Test Admin', 'test@gmail.com', '$2y$10$w5kgwrR7EnJR.gOP3C1RuOWcRPdU6KVRF0MOCXviCtWoLe.2YNH5q', '0928282828', '2023-11-17', 'avatar-uid-18.jpeg', b'0');
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -288,8 +293,8 @@ ALTER TABLE `movies`
 -- Chỉ mục cho bảng `screens`
 --
 ALTER TABLE `screens`
-  ADD PRIMARY KEY (`id`) USING BTREE,
-  ADD UNIQUE KEY `theater_screen_id` (`theater_id`,`screen_name`);
+  ADD PRIMARY KEY (`id`,`theater_id`) USING BTREE,
+  ADD KEY `theater_id` (`theater_id`);
 
 --
 -- Chỉ mục cho bảng `showtimes`
@@ -345,31 +350,31 @@ ALTER TABLE `genre`
 -- AUTO_INCREMENT cho bảng `movies`
 --
 ALTER TABLE `movies`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT cho bảng `screens`
 --
 ALTER TABLE `screens`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` tinyint(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT cho bảng `showtimes`
 --
 ALTER TABLE `showtimes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT cho bảng `theaters`
 --
 ALTER TABLE `theaters`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` tinyint(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT cho bảng `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- Các ràng buộc cho các bảng đã đổ
