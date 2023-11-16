@@ -91,7 +91,7 @@
                 <nav class="header__menu mobile-menu">
                     <ul>
                         <li><a href="index.php">Home</a></li>
-                        <li><a href="all_movies.php">All Movie</a></li>
+                        <li><a href="all_movies.php">All Movies</a></li>
                         <li><a href="about.php">About US</a></li>
                         <li><a href="feedback.php">Feedback</a></li>
                         <li><a href="contact.php">Contacts</a></li>

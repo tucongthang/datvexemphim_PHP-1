@@ -68,7 +68,7 @@
                             movies.title,
                             theaters.theater_name,
                             booking.total_price,
-                            screens.screen_number 
+                            screens.screen_name 
                     FROM
                         booking
                         INNER JOIN users ON booking.user_id = users.id
@@ -87,7 +87,7 @@
                                 <td><?php echo $row['name']; ?></td>
                                 <td><?php echo $row['title']; ?></td>
                                 <td><?php echo $row['theater_name']; ?></td>
-                                <td><?php echo $row['screen_number']; ?></td>
+                                <td><?php echo $row['screen_name']; ?></td>
                                 <td><?php echo $row['showtime_id']; ?></td>
                                 <td><?php echo $row['seats']; ?></td>
                                 <td><?php echo $row['total_seats']; ?></td>

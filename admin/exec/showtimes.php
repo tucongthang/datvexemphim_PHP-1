@@ -10,8 +10,8 @@ if (isset($_POST['add-showtime-btn'])) {
     $screen_id = mysqli_real_escape_string($conn, $_POST['showtime-screen-id']);
     $showtime = mysqli_real_escape_string($conn, $_POST['showtime-showtime']);
     $price = mysqli_real_escape_string($conn, $_POST['showtime-price']);
-    try {
 
+    try {
         $insert_record = mysqli_query($conn, "INSERT INTO `moviebooking`.`showtimes` 
         (`movie_id`, `theater_id`, `screen_id`, `showtime`, `price`) 
         VALUES ('$movie_id', '$theater_id', '$screen_id', '$showtime', '$price')");

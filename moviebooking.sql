@@ -154,14 +154,14 @@ INSERT INTO `movies` (`id`, `title`, `director`, `release_date`, `genre_id`, `la
 CREATE TABLE `screens` (
   `id` int(11) NOT NULL,
   `theater_id` int(11) DEFAULT 0,
-  `screen_number` int(11) DEFAULT 0
+  `screen_name` int(11) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
 --
 -- Đang đổ dữ liệu cho bảng `screens`
 --
 
-INSERT INTO `screens` (`id`, `theater_id`, `screen_number`) VALUES
+INSERT INTO `screens` (`id`, `theater_id`, `screen_name`) VALUES
 (1, 1, 1),
 (2, 1, 2),
 (7, 1, 3),
@@ -289,7 +289,7 @@ ALTER TABLE `movies`
 --
 ALTER TABLE `screens`
   ADD PRIMARY KEY (`id`) USING BTREE,
-  ADD UNIQUE KEY `theater_screen_id` (`theater_id`,`screen_number`);
+  ADD UNIQUE KEY `theater_screen_id` (`theater_id`,`screen_name`);
 
 --
 -- Chỉ mục cho bảng `showtimes`

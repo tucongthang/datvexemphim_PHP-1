@@ -115,12 +115,12 @@ include("templates/header.php");
 
         if (mysqli_num_rows($result) > 0) {
             while ($row = mysqli_fetch_array($result)) {
-                if ($row['running'] == 1) {
+                if ($row['running'] == 1 && $row['status'] == 1) {
                     ?>
 
-                    <div class="col-lg-3 col-md-3 col-sm-6">
+                    <div class="col-lg-3 col-md-3 col-sm-6 mb-3">
                         <div class="image-container">
-                            <img src="uploads/<?php echo $row['image']; ?>" alt="" class="w-100 img-fluid image-resize2">
+                            <img src="uploads/<?php echo $row['image']; ?>" alt="" class="w-100 img-fluid image-resize2 object-fit-cover">
                             <div class="overlay">
                                 <div class="overlay-buttons">
                                     <div class="col">
@@ -140,9 +140,9 @@ include("templates/header.php");
                                 </div>
                             </div>
                         </div>
-                        <div class="d-flex justify-content-between">
-                            <h5 class="mt-2 mb-1"><b><?php echo $row['title']; ?></b></h5>
-                            <h6 class="mt-2 mb-1"><?php echo $row['language']; ?></h6>
+                        <div class="row">
+                            <h5 class="mt-2 mb-1 col-lg-8"><b><?php echo $row['title']; ?></b></h5>
+                            <h6 class="mt-2 mb-1 col-lg-2 offset-lg-1 pl-lg-0"><?php echo $row['language']; ?></h6>
                         </div>
                     </div>
 
@@ -173,7 +173,7 @@ include("templates/header.php");
 
         if (mysqli_num_rows($result) > 0) {
             while ($row = mysqli_fetch_array($result)) {
-                if ($row['running'] == 0) {
+                if ($row['running'] == 0 && $row['status'] == 1) {
                     ?>
                     <div class="image-box">
                         <div class="col-lg-2 col-md-3 col-sm-6">

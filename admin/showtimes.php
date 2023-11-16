@@ -56,7 +56,7 @@
                     $query = "SELECT
                         showtimes.id,
                         showtimes.showtime,
-                        screens.screen_number, 
+                        screens.screen_name, 
                         theaters.theater_name,
                         movies.id as movie_id,
                         theaters.id as theater_id,
@@ -86,7 +86,7 @@
                                 <td><?php echo $row['id']; ?></td>
                                 <td><?php echo $row['title']; ?></td>
                                 <td><?php echo $row['theater_name']; ?></td>
-                                <td><?php echo $row['screen_number']; ?></td>
+                                <td><?php echo $row['screen_name']; ?></td>
                                 <td><?php echo $row['showtime']; ?></td>
                                 <td><?php echo $row['price']; ?></td>
                                 <td>
@@ -177,17 +177,17 @@
 
                                                                 <?php
                                                                 $theater_id = $row['theater_id'];
-                                                                $resultEditScreens = mysqli_query($conn, "SELECT id, screen_number FROM screens WHERE theater_id = $theater_id");
+                                                                $resultEditScreens = mysqli_query($conn, "SELECT id, screen_name FROM screens WHERE theater_id = $theater_id");
 
                                                                 if (mysqli_num_rows($resultEditScreens) > 0) {
                                                                     while ($rowEditScreens = mysqli_fetch_array($resultEditScreens)) {
-                                                                        if ($rowEditScreens['id'] == $row['screen_number']) {
+                                                                        if ($rowEditScreens['id'] == $row['screen_name']) {
                                                                         ?>
-                                                                        <option value="<?php echo $rowEditScreens['id']; ?>" selected><?php echo $rowEditScreens['screen_number']; ?></option>
+                                                                        <option value="<?php echo $rowEditScreens['id']; ?>" selected><?php echo $rowEditScreens['screen_name']; ?></option>
                                                                         <?php
                                                                         } else {
                                                                         ?>
-                                                                            <option value="<?php echo $rowEditScreens['id']; ?>"><?php echo $rowEditScreens['screen_number']; ?></option>
+                                                                            <option value="<?php echo $rowEditScreens['id']; ?>"><?php echo $rowEditScreens['screen_name']; ?></option>
                                                                         <?php
                                                                         }
                                                                     }
@@ -219,7 +219,6 @@
                                                     </div>
 
                                                     <div class="col-12">
-
                                                         <input type="submit" name="edit-showtime-btn"
                                                                id="edit-showtime-btn"
                                                                value="update" class="btn btn-primary">
@@ -328,18 +327,18 @@
                         </div>
                         <div class="col-12">
                             <div class="form-group">
-                                <label>Screen Number</label>
+                                <label>Screen Name</label>
                                 <select class="form-control category_list" name="showtime-screen-id" id="screen-select">
-                                    <option>Select Screen Number</option>
+                                    <option>Select Screen Name</option>
                                     <!--                                    --><?php
-                                    //                                    $resultScreens = mysqli_query($conn, "SELECT id, screen_number FROM screens");
+                                    //                                    $resultScreens = mysqli_query($conn, "SELECT id, screen_name FROM screens");
                                     //
                                     //                                    if (mysqli_num_rows($resultScreens) > 0) {
                                     //                                        while ($rowScreens = mysqli_fetch_array($resultScreens)) {
                                     //                                            ?>
                                     <!--                                            <option value="-->
                                     <?php //echo $rowScreens['id']; ?><!--">-->
-                                    <?php //echo $rowScreens['screen_number']; ?><!--</option>-->
+                                    <?php //echo $rowScreens['screen_name']; ?><!--</option>-->
                                     <!--                                            --><?php
                                     //                                        }
                                     //                                    }
@@ -352,7 +351,7 @@
                             <div class="form-group">
                                 <label>Showtime</label>
                                 <input type="datetime-local" class="form-control" name="showtime-showtime"
-                                       id="edit-screen-number"
+                                       id="edit-screen-name"
                                        placeholder="Enter Showtime">
                             </div>
                         </div>
@@ -370,7 +369,7 @@
                         <input type="hidden" name="add_product" value="1">
                         <div class="col-12">
 
-                            <input type="submit" name="addshow" id="addshow" value="Add Showtime" class="btn btn-primary">
+                            <input type="submit" name="add-showtime-btn" id="add-showtime-btn" value="Add Showtime" class="btn btn-primary">
                         </div>
 
 

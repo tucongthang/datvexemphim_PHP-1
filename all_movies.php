@@ -97,6 +97,10 @@ require_once('config/db_connect.php');
             height: 350px;
         }
 
+        .text-info-container {
+            flex-grow: 1;
+        }
+
     </style>
 
     </style>

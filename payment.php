@@ -58,7 +58,7 @@ if (!isset($_SESSION['username'])) {
                                 $queryUser = "SELECT * from users WHERE username = '" . $username . "'";
                                 $resultUser = mysqli_query($conn, $queryUser);
                                 $queryShowTimeInfo = "SELECT
-                                        screens.screen_number,
+                                        screens.screen_name,
                                         movies.title,
                                         theaters.theater_name,
                                         theaters.theater_address,

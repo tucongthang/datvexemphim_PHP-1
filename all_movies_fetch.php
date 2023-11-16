@@ -1,7 +1,5 @@
 <?php
 
-//fetch_data.php
-
 require_once('config/db_connect.php');
 
 if (isset($_POST["action"])) {
@@ -38,9 +36,9 @@ if (isset($_POST["action"])) {
     $output = '';
     if ($total_row > 0) {
         foreach ($result as $row) {
-            if ($row['running'] == 1) {
+            if ($row['running'] == 1 && $row['status'] == 1) {
                 $output .= '
-			<div class="col-lg-4 col-md-5 col-sm-6 mb-3 bg-white p-1">
+			<div class="col-lg-4 col-md-5 col-sm-6 mb-3 bg-white p-1 d-flex flex-column">
                 <div class="image-container">
                     <img src="uploads/' . $row['image'] . '" alt="" class="object-fit-cover w-100 img-fluid image-resize2">
                     <div class="overlay">
@@ -56,7 +54,7 @@ if (isset($_POST["action"])) {
                         </div>
                     </div>	
                 </div>
-                <div class="p-2 bg-dark text-white rounded">
+                <div class="p-2 bg-dark text-white rounded text-info-container">
                     Title : ' . $row['title'] . ' <br />
 					Director : ' . $row['director'] . ' <br />
 					Category : ' . $row['genre_name'] . '<br />
@@ -66,9 +64,9 @@ if (isset($_POST["action"])) {
 			';
             }
 
-            if ($row['running'] == 0) {
+            if ($row['running'] == 0 && $row['status'] == 1) {
                 $output .= '
-			<div class="col-lg-4 col-md-5 col-sm-6 mb-3 p-1">
+            <div class="col-lg-4 col-md-5 col-sm-6 mb-3 p-1 d-flex flex-column">
 				<div class="image-container">
                     <img src="uploads/' . $row['image'] . '" alt="" class="object-fit-cover w-100 img-fluid image-resize2">
                     <div class="overlay">
@@ -84,7 +82,7 @@ if (isset($_POST["action"])) {
                         </div>
                     </div>
                 </div>
-                <div class="p-2 bg-dark text-white rounded">
+                <div class="p-2 bg-dark text-white rounded text-info-container">
                     Title : ' . $row['title'] . ' <br />
 					Director : ' . $row['director'] . ' <br />
 					Category : ' . $row['genre_name'] . '<br />

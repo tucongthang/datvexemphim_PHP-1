@@ -65,7 +65,7 @@
                             <tr>
                                 <td><?php echo $row['id']; ?></td>
                                 <td><?php echo $row['theater_name']; ?></td>
-                                <td><?php echo $row['screen_number']; ?></td>
+                                <td><?php echo $row['screen_name']; ?></td>
                                 <td>
                                     <button data-toggle="modal" data-target="#update_screen<?php echo $row['id']; ?>"
                                             class="btn btn-primary btn-sm">Edit Screen
@@ -120,11 +120,11 @@
 
                                                     <div class="col-12">
                                                         <div class="form-group">
-                                                            <label>Screen Number</label>
+                                                            <label>Screen Name</label>
                                                             <input type="text" class="form-control"
-                                                                   name="edit-screen-number" id="edit-screen-number"
+                                                                   name="edit-screen-name" id="edit-screen-name"
                                                                    placeholder="Enter Theater Name"
-                                                                   value="<?php echo $row['screen_number']; ?>">
+                                                                   value="<?php echo $row['screen_name']; ?>">
                                                         </div>
                                                     </div>
 
@@ -217,8 +217,8 @@
                         </div>
                         <div class="col-12">
                             <div class="form-group">
-                                <label>Screen Number</label>
-                                <input class="form-control" name="number" id="screen-number"
+                                <label>Screen Name</label>
+                                <input class="form-control" name="screen-name" id="screen-name"
                                        placeholder="Enter Screen Number" required>
                             </div>
                         </div>

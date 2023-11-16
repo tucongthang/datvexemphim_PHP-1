@@ -196,61 +196,53 @@ $id = $row['id'];
                 <div class="row my-5">
                     <?php if ($row['running'] == 1) { ?>
                         <div class="col-md-12">
+
                             <div class="row px-sm-4 px-lg-0">
                                 <div class="col-md-12 pb-2 mb-4 text-black border-bottom border-danger">
                                     <h4>Lịch chiếu</h4>
                                 </div>
                             </div>
-                            <div class="row justify-content-center mb-4">
-                                <div class="col-md-12">
-                                    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                                        <div class="collapse navbar-collapse" id="navbarNav">
-                                            <ul class="navbar-nav">
-                                                <?php
-                                                for ($i = 0; $i < 4; $i++) {
-                                                    $date = date('Y-m-d', strtotime("+$i days"));
-                                                    ?>
-                                                    <li class="nav-item rounded mr-3">
-                                                        <button class="nav-link date-btn font-weight-bold" data-date="<?php echo $date; ?>">
-                                                            <?php echo date('D, M j', strtotime($date)); ?>
-                                                        </button>
-                                                    </li>
-                                                    <?php
-                                                }
-                                                ?>
-                                            </ul>
+                            <div class="row px-sm-4 px-lg-0">
+                                <?php
+                                $query = "SELECT st.id as showtime_id, s.screen_name, t.theater_name, st.showtime 
+                                              FROM showtimes st 
+                                              INNER JOIN theaters t ON st.theater_id = t.id
+                                              INNER JOIN screens s ON st.screen_id = s.id
+                                              WHERE st.movie_id = '$movieId'";
+                                $result = mysqli_query($conn, $query);
 
-                                            <div class="ml-auto d-flex">
-                                                <?php
-
-                                                $queryTheaters = "SELECT id, theater_name FROM theaters";
-
-                                                $resultTheaters = mysqli_query($conn, $queryTheaters);
-
-                                                if ($resultTheaters) {
-                                                    echo '<select id="theaterSelect" class="form-control selected-fix">';
-                                                    echo '<option value="">Select a Theater</option>';
-
-                                                    while ($rowTheaters = mysqli_fetch_assoc($resultTheaters)) {
-                                                        $selectTheaterId = $rowTheaters['id'];
-                                                        $slectTheaterName = $rowTheaters['theater_name'];
-
-                                                        echo "<option value=\"$selectTheaterId\">$slectTheaterName</option>";
-                                                    }
-
-                                                    echo '</select>';
-                                                } else {
-                                                    echo 'Error fetching theaters';
-                                                }
-                                                ?>
-
+                                if (mysqli_num_rows($result) > 0) {
+                                    while ($showtime = mysqli_fetch_assoc($result)) {
+                                        ?>
+                                        <div class="col-md-3 mb-3">
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <h5 class="card-title"><?php echo $showtime['theater_name']; ?></h5>
+                                                    <div class="list-group">
+                                                        <a href="#" class="list-group-item list-group-item-action active">
+                                                            <?php echo $showtime['screen_name']; ?> Screen
+                                                        </a>
+                                                        <div class="list-group-item">
+                                                            <?php echo date('H:i A', strtotime($showtime['showtime'])); ?>
+                                                            <a class="btn btn-primary btn-sm float-right"
+                                                               href="seatbooking.php?movieId=<?php echo $movieId; ?>&showtimeId=<?php echo $showtime['showtime_id']; ?>">
+                                                                Book Now
+                                                            </a>
+                                                        </div>
+                                                        <!-- You can add more showtimes within the same screen here -->
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                    </nav>
-                                    <div class="col-md-12 mt-3" id="showtimes-section">
-
-                                    </div>
-                                </div>
+                                        <?php
+                                    }
+                                } else {
+                                    ?>
+                                    <p>
+                                        No showtimes available.
+                                    </p>
+                                    <?php
+                                } ?>
                             </div>
                         </div>
                     <?php } ?>
@@ -324,17 +316,24 @@ $id = $row['id'];
         }
         ?>
     </div>
-</section>
 
-<script>
-    let movieId = <?php echo $movieId ?>;
-</script>
+</section>
 
 <?php
 include("templates/footer.php");
 ?>
 
-<script src="ajax/movie_details.js"></script>
 
+<!-- Js Plugins -->
+<script src="assets/js/jquery-3.3.1.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/jquery.nice-select.min.js"></script>
+<script src="assets/js/jquery.nicescroll.min.js"></script>
+<script src="assets/js/jquery.magnific-popup.min.js"></script>
+<script src="assets/js/jquery.countdown.min.js"></script>
+<script src="assets/js/jquery.slicknav.js"></script>
+<script src="assets/js/mixitup.min.js"></script>
+<script src="assets/js/owl.carousel.min.js"></script>
+<script src="assets/js/main.js"></script>
 </body>
 </html>     

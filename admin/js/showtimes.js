@@ -6,7 +6,7 @@ document.getElementById('theater-select').addEventListener('change', function ()
             document.getElementById('screen-select').innerHTML = xhr.responseText;
         }
     };
-    xhr.open('GET', 'exec/get_screen_numbers.php?theater_id=' + theaterId, true);
+    xhr.open('GET', 'exec/get_screen_names.php?theater_id=' + theaterId, true);
     xhr.send();
 });
 
@@ -19,6 +19,6 @@ document.getElementById('edit-theater-select').addEventListener('change', functi
             document.getElementById('edit-screen-select').innerHTML = xhr.responseText;
         }
     };
-    xhr.open('GET', 'exec/get_screen_numbers.php?theater_id=' + theaterId, true);
+    xhr.open('GET', 'exec/get_screen_names.php?theater_id=' + theaterId, true);
     xhr.send();
 });

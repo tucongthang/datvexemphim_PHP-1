@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="assets/css/bootstrap.min.css" type="text/css">
     <link rel="stylesheet" href="assets/css/seatbooking.css" type="text/css">
 
+
     <style>
         .body{
             background-color: white;
@@ -69,9 +70,9 @@
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
             <a class="nav-item nav-link active" href="#">Chọn phim/Rạp/Suất <span class="sr-only">(current)</span></a>
-            <a class="nav-item nav-link" href="#">Chọn ghế</a>
-            <a class="nav-item nav-link" href="#">Chọn thức ăn</a>
-            <a class="nav-item nav-link" href="#">Thanh toán</a> 
+            <a class="nav-item nav-link">Chọn ghế</a>
+            <a class="nav-item nav-link">Chọn thức ăn</a>
+            <a class="nav-item nav-link">Thanh toán</a>
             </div>
         </div>
 </nav>
@@ -180,7 +181,7 @@ if (isset($_GET['showtimeId']) && isset($_GET['movieId'])) {
                 <div class="hr" style="border-bottom: 3px solid #FFA500; margin:10px"></div>
                 <table>
                     <tr>
-                        <td><img src="..\online-movie-booking\image/<?php echo $movieImage; ?>"width="200" height="300"></td>
+                        <td><img src="uploads/<?php echo $movieImage; ?>"width="200" height="300"></td>
                         <td>
                             <font size=6 style="font-family: Shruti; color:black"><?php echo $movieTitle ?></font>
                             <font size="3px" style="display: block; color:black">2D phụ đề</font>
@@ -238,8 +239,6 @@ if (isset($_GET['showtimeId']) && isset($_GET['movieId'])) {
                         </div>
                     </div>
                 </div>
-
-
                 <?php
             }
             ?>
@@ -295,6 +294,19 @@ if (isset($_GET['showtimeId']) && isset($_GET['movieId'])) {
 
 
 </script>
+
+<script src="assets/js/jquery-3.3.1.min.js"></script>
+<!--<script src="assets/js/bootstrap.min.js"></script>-->
+<script src="assets/js/bootstrap.bundle.min.js"></script>
+<script src="assets/js/jquery.nice-select.min.js"></script>
+<script src="assets/js/jquery.nicescroll.min.js"></script>
+<script src="assets/js/jquery.magnific-popup.min.js"></script>
+<script src="assets/js/jquery.countdown.min.js"></script>
+<script src="assets/js/jquery.slicknav.js"></script>
+<script src="assets/js/mixitup.min.js"></script>
+<!--<script src="js/owl.carousel.min.js"></script>-->
+<script src="assets/js/main.js"></script>
+
 
 </body>
 </html>

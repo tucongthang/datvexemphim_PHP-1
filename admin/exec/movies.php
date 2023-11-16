@@ -29,7 +29,7 @@ if (isset($_POST['add-movie-btn'])) {
     try {
         if (in_array($file_extension, $image_ext)) {
             if (move_uploaded_file($_FILES['movie-image']['tmp_name'], $location)) {
-                $image = $location;
+                $image = $_FILES['movie-image']['name'];
             } else {
                 throw new Exception("Image upload failed");
             }

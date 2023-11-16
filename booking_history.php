@@ -136,7 +136,7 @@ include("templates/header.php");
                                     movies.title,
                                     theaters.theater_name,
                                     booking.total_price,
-                                    screens.screen_number 
+                                    screens.screen_name
                                 FROM
                                     booking
                                     INNER JOIN users ON booking.user_id = users.id
@@ -157,7 +157,7 @@ include("templates/header.php");
                                         echo "<td>{$booking['title']}</td>";
                                         echo "<td>{$booking['theater_name']}</td>";
                                         echo "<td>{$booking['total_price']}</td>";
-                                        echo "<td>{$booking['screen_number']}</td>";
+                                        echo "<td>{$booking['screen_name']}</td>";
                                         echo "</tr>";
                                     }
                                 } else {

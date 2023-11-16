@@ -26,4 +26,8 @@
         object-fit: cover;
     }
 
+    .selected-fix {
+        padding: 0 2rem;
+    }
+
 </style>
